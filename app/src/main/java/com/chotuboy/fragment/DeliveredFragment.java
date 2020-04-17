@@ -11,12 +11,15 @@ import androidx.fragment.app.Fragment;
 
 import com.chotuboy.R;
 import com.chotuboy.activity.AllOrderStatusActivity;
+import com.chotuboy.activity.MainActivity;
 
 
 public class DeliveredFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private AllOrderStatusActivity allOrderStatusActivity;
+    private MainActivity mainActivity;
+
 
     public DeliveredFragment() {
     }
@@ -44,7 +47,8 @@ public class DeliveredFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        allOrderStatusActivity = (AllOrderStatusActivity) getActivity();
+       // allOrderStatusActivity = (AllOrderStatusActivity) getActivity();
+        mainActivity = (MainActivity) getActivity();
     }
 
     @Override

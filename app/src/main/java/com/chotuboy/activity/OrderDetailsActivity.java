@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chotuboy.R;
-import com.chotuboy.adapter.OrderDetailsAdapter;
+import com.chotuboy.adapter.OrderProductDetailsAdapter;
 
 public class OrderDetailsActivity extends AppCompatActivity {
 
     private RecyclerView orderDtlsRecyc;
     private Spinner spinner;
-    OrderDetailsAdapter orderDetailsAdapter;
+    OrderProductDetailsAdapter orderProductDetailsAdapter;
     private ImageView back;
 
 
@@ -47,10 +47,10 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
 
     private void showRecycler() {
-        orderDetailsAdapter = new OrderDetailsAdapter( getApplicationContext());
+        orderProductDetailsAdapter = new OrderProductDetailsAdapter( getApplicationContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         orderDtlsRecyc.setLayoutManager(layoutManager);
         orderDtlsRecyc.setItemAnimator(new DefaultItemAnimator());
-        orderDtlsRecyc.setAdapter(orderDetailsAdapter);
+        orderDtlsRecyc.setAdapter(orderProductDetailsAdapter);
     }
 }

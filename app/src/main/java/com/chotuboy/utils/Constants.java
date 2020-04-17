@@ -32,4 +32,5 @@ public class Constants {
     public static final String USER_ADDRESS = "userAddress";
 
     public static final String USERTYPE = "userType";
+    public static final String UserTypeSelectedID ="userType";
 }

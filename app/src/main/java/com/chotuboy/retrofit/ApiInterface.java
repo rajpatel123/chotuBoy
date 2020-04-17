@@ -1,6 +1,6 @@
 package com.chotuboy.retrofit;
 
-import com.chotuboy.modelClass.forOutLet.GettingOrderResponseForOutLet;
+import com.chotuboy.modelClass.orderDetailsModel.OrderDetailsResponse;
 import com.chotuboy.modelClass.login.LoginWithOtpResponse;
 import com.chotuboy.modelClass.otpVerify.VerifyOtpResponse;
 
@@ -24,7 +24,13 @@ public interface ApiInterface {
 
     @Multipart
     @POST("http://chotu.thehighways.in/ApiData/getAllOrder")
-    Call<GettingOrderResponseForOutLet> GETTING_ORDER_RESPONSE_FOR_OUT_LET_CALL (@Part("outlet_id") RequestBody outlet_id);
+    Call<OrderDetailsResponse> orderDetailsForOutLet (@Part("outlet_id") RequestBody outlet_id);
+
+
+    @Multipart
+    @POST("http://chotu.thehighways.in/ApiData/getAllOrder")
+    Call<OrderDetailsResponse> orderDetailsForDelivery  (@Part("delivery_id") RequestBody delivery_id);
+
 
 
 }

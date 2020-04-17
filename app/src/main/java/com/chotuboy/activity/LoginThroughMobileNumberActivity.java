@@ -31,6 +31,7 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
     public RadioGroup radioGroup_User;
     public RadioButton rdBtnDelivery_Boy, rdBtnOutLet;
     private String userType;
+    public String selectedId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +62,14 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton genderrg = (RadioButton) group.findViewById(checkedId);
-                int selectedId = radioGroup_User.getCheckedRadioButtonId();
                 if (null != genderrg) {
+                    selectedId = String.valueOf(radioGroup_User.getCheckedRadioButtonId());
                     userType = genderrg.getText().toString();
                     Toast.makeText(getApplicationContext(), genderrg.getText().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "id" + selectedId, Toast.LENGTH_SHORT).show();
                     System.out.println("User Type id " + selectedId);
-                //    ChotuBoyPrefs.putString(getApplicationContext(), Constants.USERTYPE, userType);
-
+                    //    ChotuBoyPrefs.putString(getApplicationContext(), Constants.USERTYPE, userType);
+                    //    ChotuBoyPrefs.putString(getApplicationContext(),Constants.UserTypeSelectedID,selectedId);
                 }
             }
         });
@@ -104,6 +106,7 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), OtpVerificationActivity.class);
                             ChotuBoyPrefs.putString(getApplicationContext(), Constants.MOBILE, mobileNo);
                             ChotuBoyPrefs.putString(getApplicationContext(), Constants.USERTYPE, userType);
+                            ChotuBoyPrefs.putString(getApplicationContext(),Constants.UserTypeSelectedID,selectedId);
 
                             startActivity(intent);
                             finish();

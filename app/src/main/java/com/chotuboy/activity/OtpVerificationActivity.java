@@ -47,6 +47,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements SmsLis
     VerifyOtpResponse verifyOtpResponse;
     SmsReceiver smsReceiver = new SmsReceiver();
     private String userType;
+    private String selectedId;
 
 
     private static boolean hasPermissions(Context context, String... permissions) {
@@ -105,6 +106,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements SmsLis
         mobileNumberTv.setText(ChotuBoyPrefs.getString(getApplicationContext(), Constants.MOBILE));
         mobileNo = ChotuBoyPrefs.getString(getApplicationContext(), Constants.MOBILE);
         userType = ChotuBoyPrefs.getString(getApplicationContext(),Constants.USERTYPE);
+        selectedId= ChotuBoyPrefs.getString(getApplicationContext(),Constants.UserTypeSelectedID);
 
         changeNumberTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +188,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements SmsLis
 
                             Intent intent = new Intent(getApplicationContext(), AllOrderStatusActivity.class);
                             ChotuBoyPrefs.putString(getApplicationContext(),Constants.USERTYPE,userType);
+                            ChotuBoyPrefs.putString(getApplicationContext(),Constants.UserTypeSelectedID,selectedId);
                             ChotuBoyPrefs.putString(getApplicationContext(), Constants.CUSTOMERUSERID, customerUserId);
                             ChotuBoyPrefs.putString(getApplicationContext(), Constants.CUSTOMERUSERID, customerUserId);
                             ChotuBoyPrefs.putString(getApplicationContext(), Constants.FIRSTNAME, firstName);

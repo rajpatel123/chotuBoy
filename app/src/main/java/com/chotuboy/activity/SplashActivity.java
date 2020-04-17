@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
 
                 if (ChotuBoyPrefs.getBoolean(SplashActivity.this, Constants.LoginCheck)) {
-                    Intent i = new Intent(SplashActivity.this, AllOrderStatusActivity.class);
+                    Intent i = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(i);
                     finish();
                 } else {

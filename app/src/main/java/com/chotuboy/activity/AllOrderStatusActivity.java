@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 import com.chotuboy.R;
 import com.chotuboy.fragment.DeliveredFragment;
-import com.chotuboy.fragment.NewOrderFragment;
+import com.chotuboy.fragment.GettingNewOrderFragment;
 
 public class AllOrderStatusActivity extends AppCompatActivity  {
 
@@ -32,13 +32,13 @@ public class AllOrderStatusActivity extends AppCompatActivity  {
         deliveredLyOut = findViewById(R.id.DeliveredLyOut);
         back = findViewById(R.id.back);
 
-        Fragment fragment1 = NewOrderFragment.newInstance();
+        Fragment fragment1 = GettingNewOrderFragment.newInstance();
         replaceFragment(fragment1, "");
 
         newOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment1 = NewOrderFragment.newInstance();
+                Fragment fragment1 = GettingNewOrderFragment.newInstance();
                 replaceFragment(fragment1, "");
                 deliverBtn.setBackgroundColor(getResources().getColor(R.color.white));
                 deliveredLyOut.setBackgroundColor(getResources().getColor(R.color.white));
@@ -87,7 +87,7 @@ public class AllOrderStatusActivity extends AppCompatActivity  {
 
     public void handleChangedFragment(View view) {
         if (view == findViewById(R.id.NewOrderBtn)) {
-            Fragment fragment1 = NewOrderFragment.newInstance();
+            Fragment fragment1 = GettingNewOrderFragment.newInstance();
             replaceFragment(fragment1, "");
         } else if (view == findViewById(R.id.DeliverBtn)) {
             Fragment fragment2 = DeliveredFragment.newInstance();
