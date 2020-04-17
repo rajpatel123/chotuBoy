@@ -30,7 +30,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-         <activity android:name=".activity.OrderDetailsActivity" android:screenOrientation="portrait"/>
+         <activity android:name=".activity.ShowOrderProductDetailsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.AllOrderStatusActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.LoginThroughMobileNumberActivity" android:screenOrientation="portrait" />
         <activity android:name=".activity.OtpVerificationActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme2" />

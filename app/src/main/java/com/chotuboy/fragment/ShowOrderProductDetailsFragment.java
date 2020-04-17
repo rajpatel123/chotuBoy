@@ -16,8 +16,7 @@ import android.widget.Toast;
 
 import com.chotuboy.R;
 import com.chotuboy.activity.MainActivity;
-import com.chotuboy.adapter.GettingNewOrderAdapter;
-import com.chotuboy.adapter.OrderProductDetailsAdapter;
+import com.chotuboy.adapter.ShowOrderProductDetailsAdapter;
 import com.chotuboy.modelClass.orderDetailsModel.OrderDetailsResponse;
 import com.chotuboy.modelClass.orderDetailsModel.OrderInfo;
 import com.chotuboy.modelClass.orderDetailsModel.OrderProduct;
@@ -40,9 +39,8 @@ public class ShowOrderProductDetailsFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private RecyclerView showOrderedRecycler;
     List<OrderProduct> orderProductList = new ArrayList<>();
-    OrderProductDetailsAdapter orderProductDetailsAdapter;
+    ShowOrderProductDetailsAdapter showOrderProductDetailsAdapter;
     private MainActivity mainActivity;
-    GettingNewOrderAdapter gettingNewOrderAdapter;
     List<OrderInfo> orderInfoList = new ArrayList<>();
     OrderDetailsResponse orderDetailsResponse;
 
@@ -68,16 +66,11 @@ public class ShowOrderProductDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_order_details, container, false);
-
         showOrderedRecycler = view.findViewById(R.id.ShowOrderedRecycler);
-
-        Fragment fragment1 = GettingNewOrderFragment.newInstance();
-        replaceFragment(fragment1, "");
 
 
           getOrdrProductdetails();  //  goToOrderDetailsActivity, sending  data previously t
 
-        showProductOrderDetails();
         showOrderDetailsRecy();
 
         return view;
@@ -118,6 +111,12 @@ public class ShowOrderProductDetailsFragment extends Fragment {
         title1.setText(OutletId);*/
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        showProductOrderDetails();
+    }
+
     private void showProductOrderDetails() {
 
         RequestBody userType = RequestBody.create(MediaType.parse("text/plain"),
@@ -135,9 +134,8 @@ public class ShowOrderProductDetailsFragment extends Fragment {
 
                         orderDetailsResponse = response.body();
                         //orderDetailsResponse = (OrderDetailsResponse) response.body().getOrderInfo();
-                        orderProductDetailsAdapter.setData(orderDetailsResponse);
-                        orderProductDetailsAdapter.notifyDataSetChanged();
-
+                        showOrderProductDetailsAdapter.setData(orderDetailsResponse);
+                        showOrderProductDetailsAdapter.notifyDataSetChanged();
                     }
                 }
             }
@@ -155,11 +153,11 @@ public class ShowOrderProductDetailsFragment extends Fragment {
 
     private void showOrderDetailsRecy() {
         if (orderProductList != null && orderProductList.size() > 0) {
-            orderProductDetailsAdapter = new OrderProductDetailsAdapter(orderProductList, getActivity(), R.layout.order_product_details_item);
+            showOrderProductDetailsAdapter = new ShowOrderProductDetailsAdapter(orderProductList, getActivity(), R.layout.order_product_details_item);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
             showOrderedRecycler.setLayoutManager(layoutManager);
             showOrderedRecycler.setItemAnimator(new DefaultItemAnimator());
-            showOrderedRecycler.setAdapter(orderProductDetailsAdapter);
+            showOrderedRecycler.setAdapter(showOrderProductDetailsAdapter);
         } else {
             Toast.makeText(mainActivity, "Sorry no any order for you", Toast.LENGTH_SHORT).show();
         }

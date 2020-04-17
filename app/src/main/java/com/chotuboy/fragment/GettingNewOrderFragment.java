@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chotuboy.R;
 import com.chotuboy.activity.AllOrderStatusActivity;
 import com.chotuboy.activity.MainActivity;
-import com.chotuboy.activity.OrderDetailsActivity;
+import com.chotuboy.activity.ShowOrderProductDetailsActivity;
 import com.chotuboy.adapter.GettingNewOrderAdapter;
 import com.chotuboy.modelClass.orderDetailsModel.OrderDetailsResponse;
 import com.chotuboy.modelClass.orderDetailsModel.OrderInfo;
@@ -98,7 +98,11 @@ public class GettingNewOrderFragment extends Fragment {
 
                         goToOrderDetailsActivity();
 
+                    }else {
+                        Toast.makeText(getActivity(), "massage"+response.body().getStatus(), Toast.LENGTH_SHORT).show();
                     }
+                }else {
+                    Toast.makeText(getActivity(), "response"+response, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -125,7 +129,8 @@ public class GettingNewOrderFragment extends Fragment {
                                       Integer orderProductId, Integer productId, Integer priceId,
                                       Integer quantity) {
 
-                Intent intent = new Intent(getActivity(), OrderDetailsActivity.class);
+                Intent intent = new Intent(getActivity(), ShowOrderProductDetailsActivity.class);
+               // Fragment fragment3 = ShowOrderProductDetailsFragment.newInstance();
 
                 intent.putExtra("OrderId",orderId);
                 intent.putExtra("CustomerId",customerId);
@@ -152,6 +157,8 @@ public class GettingNewOrderFragment extends Fragment {
                 intent.putExtra("ProductId",productId);
                 intent.putExtra("PriceId",priceId);
                 intent.putExtra("Quantity",quantity);
+
+                //replaceFragment(fragment3, "");
                 startActivity(intent);
 
                 gettingOrderedRecycler.setAdapter(gettingNewOrderAdapter);
@@ -179,6 +186,20 @@ public class GettingNewOrderFragment extends Fragment {
         super.onAttach(context);
         // allOrderStatusActivity = (AllOrderStatusActivity) getActivity();
         mainActivity = (MainActivity) getActivity();
+    }
+
+    public void replaceFragment(Fragment fragment, String tag) {
+        try {
+            androidx.fragment.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            if (fragmentManager != null) {
+                androidx.fragment.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container_main, fragment, tag);
+                fragmentTransaction.setTransition(androidx.fragment.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

@@ -10,28 +10,28 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chotuboy.R;
-import com.chotuboy.activity.OrderDetailsActivity;
+import com.chotuboy.activity.ShowOrderProductDetailsActivity;
 import com.chotuboy.modelClass.orderDetailsModel.OrderDetailsResponse;
 import com.chotuboy.modelClass.orderDetailsModel.OrderProduct;
 
 import java.util.List;
 
-public class OrderProductDetailsAdapter extends RecyclerView.Adapter<OrderProductDetailsAdapter.ViewHolder> {
+public class ShowOrderProductDetailsAdapter extends RecyclerView.Adapter<ShowOrderProductDetailsAdapter.ViewHolder> {
     Context context;
     OrderDetailsResponse orderDetailsResponse;
     List<OrderProduct> orderProductList;
     int order_product_details_item ;
-    OrderDetailsActivity orderDetailsActivity;
+    ShowOrderProductDetailsActivity showOrderProductDetailsActivity;
 
 
-    public OrderProductDetailsAdapter(List<OrderProduct> orderProductLis, Context context1, int order_product_details_item) {
+    public ShowOrderProductDetailsAdapter(List<OrderProduct> orderProductLis, Context context1, int order_product_details_item) {
         this.orderProductList = orderProductLis;
         this.context = context1;
         this.order_product_details_item = order_product_details_item;
     }
 
-    public OrderProductDetailsAdapter(OrderDetailsActivity orderDetailsActivity, List<OrderProduct> orderProductList) {
-        this.orderDetailsActivity = orderDetailsActivity;
+    public ShowOrderProductDetailsAdapter(ShowOrderProductDetailsActivity showOrderProductDetailsActivity, List<OrderProduct> orderProductList) {
+        this.showOrderProductDetailsActivity = showOrderProductDetailsActivity;
         this.orderProductList = orderProductList;
     }
 
