@@ -22,8 +22,8 @@ import androidx.core.app.ActivityCompat;
 import com.chotuboy.R;
 import com.chotuboy.modelClass.login.LoginWithOtpResponse;
 import com.chotuboy.modelClass.otpVerify.VerifyOtpResponse;
-import com.chotuboy.receivers.SmsListener;
-import com.chotuboy.receivers.SmsReceiver;
+import com.chotuboy.commonBase.receiver.SmsListener;
+import com.chotuboy.commonBase.receiver.SmsReceiver;
 import com.chotuboy.retrofit.RestClient;
 import com.chotuboy.utils.ChotuBoyPrefs;
 import com.chotuboy.utils.Constants;
@@ -106,7 +106,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements SmsLis
         mobileNumberTv.setText(ChotuBoyPrefs.getString(getApplicationContext(), Constants.MOBILE));
         mobileNo = ChotuBoyPrefs.getString(getApplicationContext(), Constants.MOBILE);
         userType = ChotuBoyPrefs.getString(getApplicationContext(),Constants.USERTYPE);
-        selectedId= ChotuBoyPrefs.getString(getApplicationContext(),Constants.UserTypeSelectedID);
+       // selectedId= ChotuBoyPrefs.getString(getApplicationContext(),Constants.UserTypeSelectedID);
 
         changeNumberTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +153,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements SmsLis
 
     }
 
-    public void verifyPinOperation() {
+    public boolean otpInput() {
         boolean check = true;
         otpNumber = verifyPinEdtText.getText().toString().trim();
         if (otpNumber.isEmpty() || verifyPinEdtText.length()<4) {
@@ -164,7 +164,11 @@ public class OtpVerificationActivity extends AppCompatActivity implements SmsLis
             check = true;
         }
 
-        if (check) {
+      return check;
+    }
+
+    public void verifyPinOperation(){
+        if (otpInput()){
 
             RequestBody phoneno = RequestBody.create(MediaType.parse("text/plain"), mobileNo);
             RequestBody otp = RequestBody.create(MediaType.parse("text/plain"), otpNumber);
@@ -188,7 +192,7 @@ public class OtpVerificationActivity extends AppCompatActivity implements SmsLis
 
                             Intent intent = new Intent(getApplicationContext(), AllOrderStatusActivity.class);
                             ChotuBoyPrefs.putString(getApplicationContext(),Constants.USERTYPE,userType);
-                            ChotuBoyPrefs.putString(getApplicationContext(),Constants.UserTypeSelectedID,selectedId);
+                            //ChotuBoyPrefs.putString(getApplicationContext(),Constants.UserTypeSelectedID,selectedId);
                             ChotuBoyPrefs.putString(getApplicationContext(), Constants.CUSTOMERUSERID, customerUserId);
                             ChotuBoyPrefs.putString(getApplicationContext(), Constants.CUSTOMERUSERID, customerUserId);
                             ChotuBoyPrefs.putString(getApplicationContext(), Constants.FIRSTNAME, firstName);
@@ -216,6 +220,8 @@ public class OtpVerificationActivity extends AppCompatActivity implements SmsLis
         }
 
     }
+
+
 
 
     @Override

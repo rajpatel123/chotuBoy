@@ -157,9 +157,6 @@ public class ShowOrderProductDetailsActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     // onBacked pressed registration
     boolean doubleBackToExitPressedOnce = false;
     @Override

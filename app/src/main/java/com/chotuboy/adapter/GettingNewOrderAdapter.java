@@ -89,19 +89,19 @@ public class GettingNewOrderAdapter extends RecyclerView.Adapter<GettingNewOrder
 
     @Override
     public int getItemCount() {
-
+/*
         if (orderDetailsResponse!=null
         && orderDetailsResponse.getOrderInfo()!=null
         && orderDetailsResponse.getOrderInfo().size()>0){
         return orderDetailsResponse.getOrderInfo().size();
         }else {
             return 0;
+        }*/
+         if (orderInfos != null && orderInfos.size() > 0) {
+            return orderInfos.size();
+        } else {
+            return 0;
         }
-//         if (orderInfos != null && orderInfos.size() > 0) {
-//            return orderInfos.size();
-//        } else {
-//            return 0;
-//        }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

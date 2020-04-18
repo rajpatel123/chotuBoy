@@ -64,13 +64,10 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton genderrg = (RadioButton) group.findViewById(checkedId);
                 if (null != genderrg) {
-                    selectedId = String.valueOf(radioGroup_User.getCheckedRadioButtonId());
                     userType = genderrg.getText().toString();
+                    //selectedId = String.valueOf(radioGroup_User.getCheckedRadioButtonId());
                     Toast.makeText(getApplicationContext(), genderrg.getText().toString(), Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), "id" + selectedId, Toast.LENGTH_SHORT).show();
                     System.out.println("User Type id " + selectedId);
-                    //    ChotuBoyPrefs.putString(getApplicationContext(), Constants.USERTYPE, userType);
-                    //    ChotuBoyPrefs.putString(getApplicationContext(),Constants.UserTypeSelectedID,selectedId);
                 }
             }
         });
@@ -107,7 +104,7 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), OtpVerificationActivity.class);
                             ChotuBoyPrefs.putString(getApplicationContext(), Constants.MOBILE, mobileNo);
                             ChotuBoyPrefs.putString(getApplicationContext(), Constants.USERTYPE, userType);
-                            ChotuBoyPrefs.putString(getApplicationContext(),Constants.UserTypeSelectedID,selectedId);
+                           // ChotuBoyPrefs.putString(getApplicationContext(),Constants.UserTypeSelectedID,selectedId);
 
                             startActivity(intent);
                             finish();

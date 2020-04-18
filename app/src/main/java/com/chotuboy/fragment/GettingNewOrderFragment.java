@@ -39,7 +39,7 @@ import retrofit2.Response;
 public class GettingNewOrderFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    private AllOrderStatusActivity allOrderStatusActivity;
+    AllOrderStatusActivity allOrderStatusActivity;
     LinearLayout orderShowLayOut;
     RecyclerView gettingOrderedRecycler;
     GettingNewOrderAdapter gettingNewOrderAdapter;
@@ -70,10 +70,17 @@ public class GettingNewOrderFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_getting_new_order, container, false);
         gettingOrderedRecycler = view.findViewById(R.id.GettingOrderedRecycler);
 
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         gettingNewOrder();
         showGettingOrderRecy();
 
-        return view;
     }
 
     private void gettingNewOrder() {
@@ -184,8 +191,8 @@ public class GettingNewOrderFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // allOrderStatusActivity = (AllOrderStatusActivity) getActivity();
         mainActivity = (MainActivity) getActivity();
+        //allOrderStatusActivity = (AllOrderStatusActivity) getActivity();
     }
 
     public void replaceFragment(Fragment fragment, String tag) {
