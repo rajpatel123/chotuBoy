@@ -81,7 +81,7 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.newbooking.call" />
+                <action android:name="com.newOrder.call" />
             </intent-filter>
         </receiver>
 

@@ -36,7 +36,7 @@ public class Constants {
     public static final String NEW_ORDER ="NEW_ORDER";
 
     public static final String PUSH_NEW_ORDER_DATA_KEY = "push_new_order_data_key";
-    public static final String PUSH_ACTION = "com.neworder.call";
+    public static final String PUSH_ACTION = "com.newOrder.call";
     public static final String PUSH_TYPE = "pushedOrderType";
     public static final String CUSTOMER_NAME = "customer";
     public static final String PUSH_MOBILE = "mobile";

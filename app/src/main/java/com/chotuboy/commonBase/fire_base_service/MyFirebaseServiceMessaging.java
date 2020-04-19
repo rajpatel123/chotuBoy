@@ -99,7 +99,6 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
                         sendNotification(jsonObject, orderType,"New Order Conformed" );
 
-
                         break;
 
                     case ORDER_DELIVER:
