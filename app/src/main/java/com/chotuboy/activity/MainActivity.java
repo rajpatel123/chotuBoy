@@ -1,7 +1,9 @@
-package com.chotuboy;
+package com.chotuboy.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.chotuboy.R;
 
 public class MainActivity extends AppCompatActivity {
 

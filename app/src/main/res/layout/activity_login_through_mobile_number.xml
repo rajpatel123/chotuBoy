@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.LoginThroughMobileNumberActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/appImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/app_logo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/_20"
+                android:paddingTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/_10dp"
+                android:paddingRight="@dimen/_20"
+                android:paddingBottom="@dimen/dp_10"
+                android:text="Enter Mobile Number"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textSize="@dimen/_16dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edtTxtMobNo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40"
+                android:layout_marginRight="@dimen/margin_40"
+                android:layout_marginLeft="@dimen/margin_40"
+                android:background="@drawable/input_bottom_line"
+                android:hint="Enter Mobile Number"
+                android:inputType="number"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_16dp"
+                android:layout_marginRight="@dimen/_16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Login As"
+                    android:textSize="@dimen/_16dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="70"
+                    android:textColor="@color/black"/>
+
+                <RadioGroup
+                    android:id="@+id/userTypeRdGp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="30"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/RdBtnDeliveryBoy"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Delivery Partner"/>
+                    <RadioButton
+                        android:id="@+id/RdBtnOutLet"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="OutLet Partner"/>
+
+                </RadioGroup>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnSendOtp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/margin_40"
+            android:layout_marginRight="@dimen/margin_40"
+            android:layout_marginTop="@dimen/margin_30"
+            android:background="@drawable/btn_shape_draw"
+            android:text="Send Otp "
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
