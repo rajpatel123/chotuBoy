@@ -1,4 +1,4 @@
-package com.chotuboy.receivers;
+package com.chotuboy.commonBase.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

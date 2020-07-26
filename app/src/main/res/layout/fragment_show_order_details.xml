@@ -7,10 +7,11 @@
     android:elevation="@dimen/_10dp"
     android:orientation="vertical"
     android:background="@drawable/cardview_shape"
-    >
+    tools:context=".fragment.ShowOrderProductDetailsFragment">
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/DeliveredRecycler"
+        android:id="@+id/ShowOrderedRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_10dp"
@@ -18,5 +19,7 @@
         android:layout_marginRight="@dimen/_10dp"
         android:layout_marginBottom="@dimen/_10dp"
         android:padding="@dimen/_10dp" />
+
+
 
 </FrameLayout>

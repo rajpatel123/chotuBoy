@@ -1,11 +1,11 @@
 
-package com.chotuboy.modelClass.forOutLet;
+package com.chotuboy.modelClass.orderDetailsModel;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GettingOrderResponseForOutLet {
+public class OrderDetailsResponse {
 
     @SerializedName("status")
     @Expose

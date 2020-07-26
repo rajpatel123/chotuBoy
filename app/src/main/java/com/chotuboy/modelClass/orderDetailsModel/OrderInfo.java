@@ -1,5 +1,5 @@
 
-package com.chotuboy.modelClass.forOutLet;
+package com.chotuboy.modelClass.orderDetailsModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

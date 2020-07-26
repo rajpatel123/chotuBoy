@@ -33,7 +33,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/OrderedCode"
+                android:id="@+id/customerId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
@@ -85,7 +85,7 @@
         android:layout_marginRight="@dimen/_10dp"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/Tv1Product"
+            android:id="@+id/Tv1Product_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Apple"
@@ -98,7 +98,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/Tv2ProductWeight"
+            android:id="@+id/Tv2ProductQuantity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="2 kg"
