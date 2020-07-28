@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChotuBoy</string>
+    <string name="app_name">Chotu Partner</string>
 
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -95,4 +95,13 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Profile</string>
+
+    <string-array name="order_statusfor_outlet">
+        <item>Select Order Status</item>
+        <item>Processing</item>
+        <item>Processed</item>
+        <item>Complete</item>
+    </string-array>
+
+
 </resources>

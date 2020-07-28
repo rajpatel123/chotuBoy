@@ -254,6 +254,42 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10dp">
+
+                    <Spinner
+                        android:id="@+id/orderStatusSP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/orderStatusUpdateBtn"
+                        android:entries="@array/order_statusfor_outlet" />
+
+                    <EditText
+                        android:id="@+id/commentEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@id/orderStatusUpdateBtn"
+                        android:layout_below="@+id/orderStatusSP"
+                        android:hint="Enter comment"
+                        android:text=""
+                        android:layout_marginTop="@dimen/margin_50"/>
+
+                    <Button
+                        android:id="@+id/orderStatusUpdateBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:maxHeight="@dimen/dp_35"
+                        android:background="@color/colorPrimary"
+                        android:text="Update" />
+                </RelativeLayout>
+
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

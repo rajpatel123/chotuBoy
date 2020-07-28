@@ -1,20 +1,42 @@
 apply plugin: 'com.android.application'
 
+def uatKeystorePropertiesFile = rootProject.file("release_signing.properties")
+def uatKeystoreProperties = new Properties()
+uatKeystoreProperties.load(new FileInputStream(uatKeystorePropertiesFile))
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.chotuboy"
+        applicationId "com.chotupartner"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     dataBinding {
         enabled = true
     }
 
+
+    signingConfigs {
+        chotu {
+            keyAlias uatKeystoreProperties['KEY_ALIAS']
+            keyPassword uatKeystoreProperties['KEY_PASSWORD']
+            storeFile file(uatKeystoreProperties['STORE_FILE'])
+            storePassword uatKeystoreProperties['STORE_PASSWORD']
+            v2SigningEnabled false
+        }
+
+    }
     /* buildTypes {
         release {
             minifyEnabled false
@@ -24,7 +46,7 @@ android {
 
     buildTypes {
         release {
-            debuggable true
+            debuggable false
             // debuggable false
             multiDexEnabled true
             minifyEnabled false
