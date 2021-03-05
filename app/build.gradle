@@ -50,7 +50,7 @@ android {
             // debuggable false
             multiDexEnabled true
             minifyEnabled false
-            buildConfigField "String", "API_SERVER_IP", "\"http://chotugrocery.com/\""
+            buildConfigField "String", "API_SERVER_IP", "\"http://dev.chotugrocery.com/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -58,7 +58,7 @@ android {
             minifyEnabled false
             debuggable true
             multiDexEnabled true
-            buildConfigField "String", "API_SERVER_IP", "\"http://chotugrocery.com/\""
+            buildConfigField "String", "API_SERVER_IP", "\"http://dev.chotugrocery.com/\""
             //buildConfigField "String", "API_SERVER_IP", "\"http://13.126.93.95:8080\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
