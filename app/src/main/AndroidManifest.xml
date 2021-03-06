@@ -36,6 +36,16 @@
             android:name=".activity.OtpVerificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2" />
+
+        <activity
+            android:name=".activity.PrivacyPolicyActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity
+            android:name=".activity.AboutUsActivity"
+            android:screenOrientation="portrait"
+           />
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">

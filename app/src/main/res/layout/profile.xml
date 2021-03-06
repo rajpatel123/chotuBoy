@@ -32,7 +32,6 @@
                 android:layout_height="@dimen/margin_200"
                 android:gravity="center"
                 android:scaleType="fitXY"
-
                 android:src="@drawable/grocery_image_item"/>
 
             <LinearLayout
@@ -47,7 +46,7 @@
                     android:gravity="center"
                     android:backgroundTint="@color/colorPrimary"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/ic_menu_gallery"/>
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -76,7 +75,7 @@
                     android:gravity="center"
                     android:backgroundTint="@color/colorPrimary"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/ic_menu_gallery"/>
+                  />
 
                 <TextView
                     android:layout_width="match_parent"

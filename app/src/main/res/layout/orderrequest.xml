@@ -50,25 +50,7 @@
                         android:textAllCaps="true"
                         android:textColor="@color/white" />
 
-                    <TextView
-                        android:id="@+id/tvOrderTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
-                        android:text="8:00 AM,"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white" />
 
-                    <TextView
-                        android:id="@+id/tvOrderDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
-                        android:text="3 march 2021"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -78,16 +60,9 @@
 
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Delivery Time:"
-                        android:textColor="@color/white" />
 
                     <TextView
-                        android:id="@+id/deliveryDate"
+                        android:id="@+id/deliveryTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -509,7 +484,7 @@
                     android:layout_height="@dimen/margin_30"
                     android:gravity="center"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_shopping_cart_icon_png_1"/>
+                    android:src="@drawable/ic_cart_bag"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -527,7 +502,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/my_wallet_icon"/>
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"/>
 
             </LinearLayout>
 

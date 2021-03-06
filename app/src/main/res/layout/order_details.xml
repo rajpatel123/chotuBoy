@@ -208,7 +208,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight=".8"
-                                    android:text="Pending"
+                                    android:text="Confirmed"
                                     android:textColor="@color/bottom_gray"
                                     android:textSize="11dp"></TextView>
 
@@ -217,7 +217,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight=".8"
-                                    android:text="Packed"
+                                    android:text="Processing"
                                     android:textColor="@color/bottom_gray"
                                     android:textSize="11dp"></TextView>
 
@@ -226,7 +226,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight=".9"
-                                    android:text="On the way"
+                                    android:text="Dispatched"
                                     android:textColor="@color/bottom_gray"
                                     android:textSize="11dp"></TextView>
 
@@ -279,7 +279,6 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:drawableLeft="@drawable/paid"
                             android:drawablePadding="5dp"
                             android:gravity="left|center"
                             android:text=""

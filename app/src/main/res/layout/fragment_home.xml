@@ -33,7 +33,7 @@
 
                 <View
                     android:id="@+id/cView"
-                    android:layout_width="115dp"
+                    android:layout_width="120dp"
                     android:layout_height="3dp"
                     android:visibility="invisible"
                     android:layout_marginTop="@dimen/dp_5"
@@ -59,10 +59,9 @@
 
                 <View
                     android:id="@+id/oView"
-                    android:layout_width="115dp"
+                    android:layout_width="120dp"
                     android:layout_height="3dp"
                     android:visibility="invisible"
-
                     android:layout_marginTop="@dimen/dp_5"
                     android:background="@color/green"/>
             </LinearLayout>

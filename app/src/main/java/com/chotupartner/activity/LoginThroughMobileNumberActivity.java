@@ -3,7 +3,6 @@ package com.chotupartner.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +42,7 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
     ImageView imageViewbackGroundImage;
     public RadioGroup radioGroup_User;
     public RadioButton rdBtnDelivery_Boy, rdBtnOutLet;
-    private String userType;
+    private String userType="3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,28 +53,8 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
         btnSendOtp = findViewById(R.id.btnSendOtp);
         rdBtnDelivery_Boy = findViewById(R.id.RdBtnDeliveryBoy);
         rdBtnOutLet = findViewById(R.id.RdBtnOutLet);
-        imageViewbackGroundImage= findViewById(R.id.backGroundImage);
+        imageViewbackGroundImage = findViewById(R.id.backGroundImage);
         radioGroup_User = findViewById(R.id.userTypeRdGp);
-
-        Glide.with(LoginThroughMobileNumberActivity.this)
-                .load(R.drawable.login_screen_background)
-
-                .addListener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        return false;
-                    }
-                }).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true)
-                 // scale to fit entire image within ImageView
-                .into(imageViewbackGroundImage);
-
-
         selectUserType();
 
         btnSendOtp.setOnClickListener(new View.OnClickListener() {
@@ -92,49 +71,16 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
         radioGroup_User.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton genderrg =  group.findViewById(checkedId);
+                RadioButton genderrg = group.findViewById(checkedId);
                 int selectedId = radioGroup_User.getCheckedRadioButtonId();
                 if (null != genderrg) {
                     userType = genderrg.getText().toString();
-                    if (userType.equalsIgnoreCase("Delivery Partner")){
-                        Glide.with(LoginThroughMobileNumberActivity.this)
-                                .load(R.drawable.grocery_offers_img)
-
-                                .addListener(new RequestListener<Drawable>() {
-                                    @Override
-                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                        return false;
-                                    }
-
-                                    @Override
-                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                        return false;
-                                    }
-                                }).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .skipMemoryCache(true)
-                                 // scale to fit entire image within ImageView
-                                .into(imageViewbackGroundImage);
-                        userType="2";
-                    }else{
-
-                        Glide.with(LoginThroughMobileNumberActivity.this)
-                                .load(R.drawable.grocery_image_item)
-
-                                .addListener(new RequestListener<Drawable>() {
-                                    @Override
-                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                        return false;
-                                    }
-
-                                    @Override
-                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                        return false;
-                                    }
-                                }).diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .skipMemoryCache(true)
-                                // scale to fit entire image within ImageView
-                                .into(imageViewbackGroundImage);
-                        userType="3";
+                    if (userType.equalsIgnoreCase("Delivery Partner")) {
+                        imageViewbackGroundImage.setBackgroundResource(R.drawable.ic_delivery);
+                        userType = "2";
+                    } else {
+                        imageViewbackGroundImage.setBackgroundResource(R.drawable.ic_outlet);
+                        userType = "3";
                     }
 
 
@@ -162,14 +108,6 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
             check = true;
         }
 
-
-        if (userType.isEmpty() ) {
-            Toast.makeText(getApplicationContext(),"Please select Login as", Toast.LENGTH_SHORT).show();
-            check = false;
-        } else {
-            check = true;
-        }
-
         return check;
     }
 
@@ -180,7 +118,7 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
             RequestBody loginAs = RequestBody.create(MediaType.parse("text/plain"), userType);
             Utils.showProgressDialog(this);
 
-            RestClient.logInWithOtpNewUser(phoneno,loginAs, new Callback<LoginWithOtpResponse>() {
+            RestClient.logInWithOtpNewUser(phoneno, loginAs, new Callback<LoginWithOtpResponse>() {
                 @Override
                 public void onResponse(Call<LoginWithOtpResponse> call, Response<LoginWithOtpResponse> response) {
                     Utils.dismissProgressDialog();
@@ -193,11 +131,11 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                             Toast.makeText(LoginThroughMobileNumberActivity.this, "Pls verify Otp!", Toast.LENGTH_SHORT).show();
-                        }else if(response.body().getStatus().equalsIgnoreCase("false")){
+                        } else if (response.body().getStatus().equalsIgnoreCase("false")) {
                             Snackbar.make(findViewById(android.R.id.content), "We are unable to find your account at Chotu Grocery, Please contact to support", Snackbar.LENGTH_LONG)
                                     .setActionTextColor(Color.WHITE)
                                     .show();
-                        }else {
+                        } else {
                             Snackbar.make(findViewById(android.R.id.content), "Something went wrong!!", Snackbar.LENGTH_LONG)
                                     .setActionTextColor(Color.WHITE)
                                     .show();

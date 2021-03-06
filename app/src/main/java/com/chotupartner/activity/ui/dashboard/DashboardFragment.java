@@ -21,7 +21,6 @@ import com.chotupartner.activity.ui.home.HomeFragment;
 import com.chotupartner.adapter.ConfirmedOrderAdapter;
 import com.chotupartner.databinding.FragmentDashboardBinding;
 import com.chotupartner.databinding.FragmentHomeBinding;
-import com.chotupartner.databinding.OrderDetailsBinding;
 import com.chotupartner.modelClass.orderlist.OrderInfo;
 import com.chotupartner.modelClass.orderlist.OrderListResponse;
 import com.chotupartner.retrofit.RestClient;

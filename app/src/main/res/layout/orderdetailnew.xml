@@ -186,7 +186,7 @@
 
                         android:layout_width="@dimen/dp_20"
                         android:layout_height="@dimen/dp_20"
-                        android:background="@drawable/reward_circle_blue" />
+                       />
 
                     <View
                         android:layout_width="match_parent"
@@ -197,7 +197,7 @@
 
                         android:layout_width="@dimen/dp_20"
                         android:layout_height="@dimen/dp_20"
-                        android:background="@drawable/reward_circle_blue" />
+                       />
 
                 </LinearLayout>
 

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chotupartner.OrderDetailsActivity;
 import com.chotupartner.R;
 import com.chotupartner.modelClass.orderlist.OrderInfo;
+import com.chotupartner.utils.DateFormats;
 import com.chotupartner.utils.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -109,7 +110,8 @@ public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAd
 
         }
 
-
+        holder.tvOrderPlaced.setText(" ORDER PLACED ON : "+DateFormats.reverseDate(moviesList.get(position).getDateAdded().split(" ")[0])
+                +" "+DateFormats.formatTime(moviesList.get(position).getDateAdded().split(" ")[1]));
         holder.totalPaidAmount.setText("Rs " + total);
 
 
@@ -118,7 +120,8 @@ public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAd
         String date = "" + cl.get(Calendar.DAY_OF_MONTH) + "-" + cl.get(Calendar.MONTH) + "-" + cl.get(Calendar.YEAR);
         String time = "" + cl.get(Calendar.HOUR_OF_DAY) + ":" + cl.get(Calendar.MINUTE) + ":" + cl.get(Calendar.SECOND);
 
-        holder.deliveryDate.setText("Placed on " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
+        holder.tvOrderPlaced.setText("ORDER Placed on :" + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
+        holder.deliveryTime.setText("Delivery Date :" + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
 
 //        holder.DeliveryDate.setText("Scheduled for " + date + " " + time);
 
@@ -150,7 +153,7 @@ public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAd
         public View iv1Line, iv2Line, iv3Line;
 
         RelativeLayout rl;
-        TextView deliveryDate, tvOrderPlaced, tvPrice,deliveryPeronName, acceptTV,rejectTv,deliveryCode,deliveryPersonNumber,tvOrderID1, tvDeliveryChar, totalPaidAmount,paymentMode;
+        TextView  tvOrderPlaced,deliveryTime, tvPrice,deliveryPeronName, acceptTV,rejectTv,deliveryCode,deliveryPersonNumber,tvOrderID1, tvDeliveryChar, totalPaidAmount,paymentMode;
         LinearLayout llImage, llOutLetText, llTop;
         Button btnViewDetails;
 
@@ -158,9 +161,9 @@ public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAd
             super(itemView);
 
 
-            deliveryDate = itemView.findViewById(R.id.deliveryDate);
             deliveryCode = itemView.findViewById(R.id.deliveryCode);
-            tvOrderPlaced = itemView.findViewById(R.id.tvStoreName);
+            tvOrderPlaced = itemView.findViewById(R.id.tvOrderPlaced);
+            deliveryTime = itemView.findViewById(R.id.deliveryTime);
             deliveryPeronName = itemView.findViewById(R.id.deliveryPeronName);
             deliveryPersonNumber = itemView.findViewById(R.id.deliveryPersonNumber);
 
