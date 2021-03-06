@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,13 +30,14 @@ import com.chotupartner.utils.ChotuBoyPrefs;
 import com.google.gson.Gson;
 
 
-public class NotificationsFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;
 
     TextView nameTv,phonetv,addressTv,cityTv;
     ImageView imageView;
     Button logoutBtn;
+    LinearLayout phoneLL;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class NotificationsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
         nameTv = root.findViewById(R.id.outletName);
+        phoneLL = root.findViewById(R.id.phoneLL);
         phonetv = root.findViewById(R.id.phoneTv);
         addressTv = root.findViewById(R.id.addressTv);
         cityTv = root.findViewById(R.id.cityTv);
@@ -70,12 +73,23 @@ public class NotificationsFragment extends Fragment {
     }
 
     private void updateDetails() {
+        User  user = null;
         if (!TextUtils.isEmpty(ChotuBoyPrefs.getString(getActivity(), "outletData"))) {
-            User user = new Gson().fromJson(ChotuBoyPrefs.getString(getActivity(), "outletData"),User.class);
+            user = new Gson().fromJson(ChotuBoyPrefs.getString(getActivity(), "outletData"),User.class);
             nameTv.setText(user.getOutletName());
             phonetv.setText(user.getPhone());
+            phoneLL.setVisibility(View.VISIBLE);
             addressTv.setText(user.getAddress());
             cityTv.setText(user.getAssignedCity());
+
+        }else{
+            user = new Gson().fromJson(ChotuBoyPrefs.getString(getActivity(), "deliveryData"),User.class);
+            nameTv.setText(user.getDelivery_name());
+            phoneLL.setVisibility(View.GONE);
+            addressTv.setText(user.getAddress());
+            cityTv.setText(user.getCity());
+
+        }
 
             if (!TextUtils.isEmpty(user.getImage())){
                 Glide.with(getActivity())
@@ -97,9 +111,6 @@ public class NotificationsFragment extends Fragment {
                         .into(imageView);
             }
 
-        }else{
-            User user = new Gson().fromJson(ChotuBoyPrefs.getString(getActivity(), "deliveryData"),User.class);
-
         }
     }
-}
+

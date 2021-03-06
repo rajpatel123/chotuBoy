@@ -93,7 +93,7 @@
     <string name="otp_sent_on_mobno">Please check the OTP sent your</string>
     <string name="title_activity_dash_board">DashBoardActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">History</string>
     <string name="title_notifications">Profile</string>
 
     <string-array name="order_statusfor_outlet">

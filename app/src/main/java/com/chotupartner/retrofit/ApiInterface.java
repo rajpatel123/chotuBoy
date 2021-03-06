@@ -31,8 +31,8 @@ public interface ApiInterface {
     @Multipart
     @POST("ApiData/VerifyOtp")
     Call<DeliveryPartnerResponse> verifyOtpDelivery(@Part("phone") RequestBody phone,
-                                                  @Part("otp") RequestBody otp,
-                                                  @Part("user_type") RequestBody user_type
+                                                    @Part("otp") RequestBody otp,
+                                                    @Part("user_type") RequestBody user_type
     );
 
 
@@ -40,9 +40,35 @@ public interface ApiInterface {
     @POST("ApiData/getAllOrder")
     Call<OrderListResponse> GETTING_ORDER_RESPONSE_FOR_OUT_LET_CALL(@Part("outlet_id") RequestBody outlet_id);
 
+
+    @Multipart
+    @POST("ApiData/getNewOrders")
+    Call<OrderListResponse> getPendingOrders(@Part("outlet_id") RequestBody outlet_id);
+
+
+    @Multipart
+    @POST("ApiData/getOngoingOrders")
+    Call<OrderListResponse> getConfirmedOrders(@Part("outlet_id") RequestBody outlet_id);
+
+    @Multipart
+    @POST("ApiData/getDeliveryNewOrders")
+    Call<OrderListResponse> getDeliveryNewOrders(@Part("delivery_id") RequestBody outlet_id);
+
+
+    @Multipart
+    @POST("ApiData/getDeliveryOngoingOrders")
+    Call<OrderListResponse> getDeliveryOngoingOrders(@Part("delivery_id") RequestBody outlet_id);
+
+
+
     @Multipart
     @POST("ApiData/getAllOrder")
-    Call<OrderListResponse> GETTING_ORDER_RESPONSE_FOR_OUT_LET_CALL_Delevery(@Part("delivery_id") RequestBody outlet_id);
+    Call<OrderListResponse> getAllOrderDelivery(@Part("delivery_id") RequestBody outlet_id);
+
+
+    @Multipart
+    @POST("ApiData/getAllOrder")
+    Call<OrderListResponse> getAllOrderOutlet(@Part("outlet_id") RequestBody outlet_id);
 
 
     @Multipart
@@ -56,8 +82,13 @@ public interface ApiInterface {
 
 
     @Multipart
+    @POST("ApiData/updateOrderStatus")
+    Call<ResponseBody> updateOrderStatus(@Part("outlet_id") RequestBody outletId,@Part("order_id") RequestBody customer_id, @Part("order_status") RequestBody order_status);
+
+
+    @Multipart
     @POST("ApiData/update_order")
-    Call<ResponseBody> updateOrderStatus(@Part("order_id") RequestBody customer_id, @Part("order_status") RequestBody order_status, @Part("comment") RequestBody comment,@Part("otp") RequestBody otp);
+    Call<ResponseBody> update_order(@Part("order_id") RequestBody customer_id, @Part("order_status") RequestBody order_status,  @Part("otp") RequestBody otp,@Part("comment") RequestBody comment);
 
 
 //    @Multipart

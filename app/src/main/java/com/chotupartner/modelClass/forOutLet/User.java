@@ -11,6 +11,10 @@ private String outletId;
 @SerializedName("outlet_name")
 @Expose
 private String outletName;
+
+@SerializedName("delivery_name")
+@Expose
+private String delivery_name;
 @SerializedName("phone")
 @Expose
 private String phone;
@@ -20,6 +24,26 @@ private String address;
 @SerializedName("assigned_city")
 @Expose
 private String assignedCity;
+
+    public String getDelivery_name() {
+        return delivery_name;
+    }
+
+    public void setDelivery_name(String delivery_name) {
+        this.delivery_name = delivery_name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @SerializedName("city")
+@Expose
+private String city;
 @SerializedName("zipcode")
 @Expose
 private String zipcode;

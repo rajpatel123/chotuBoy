@@ -53,25 +53,8 @@ String selectedOrderStatus;
         orderID = intent.getIntExtra("orderID",0);
         mBinding.layoutTop.txt.setText("Orders Details");
 
-        mBinding.orderStatusUpdateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                comments = mBinding.commentEdt.getText().toString();
-                updateOrderstatus();
-            }
-        });
-       mBinding.orderStatusSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-          @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              final String[] values = getResources().getStringArray(R.array.order_statusfor_outlet);
-              selectedOrderStatus= values[position];
-          }
 
-          @Override
-          public void onNothingSelected(AdapterView<?> parent) {
 
-          }
-      });
         mBinding.layoutTop.backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,21 +97,21 @@ String selectedOrderStatus;
           RequestBody orderID1 = RequestBody.create(MediaType.parse("text/plain"), ""+orderID);
           RequestBody comment = RequestBody.create(MediaType.parse("text/plain"), ""+comments);
 
-
-          RestClient.updateOrderStatus(orderID1, status, comment, new Callback<ResponseBody>() {
-              @Override
-              public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Utils.dismissProgressDialog();
-                  if (response.code()==200){
-                      Toast.makeText(OrderDetailsActivity.this, "Order updated", Toast.LENGTH_LONG).show();
-                  }
-              }
-
-              @Override
-              public void onFailure(Call<ResponseBody> call, Throwable t) {
-                  Utils.dismissProgressDialog();
-              }
-          });
+          RequestBody otp = RequestBody.create(MediaType.parse("text/plain"), ""+comments);
+//          RestClient.update_order(orderID1, status, comment,otp, new Callback<ResponseBody>() {
+//              @Override
+//              public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                Utils.dismissProgressDialog();
+//                  if (response.code()==200){
+//                      Toast.makeText(OrderDetailsActivity.this, "Order updated", Toast.LENGTH_LONG).show();
+//                  }
+//              }
+//
+//              @Override
+//              public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                  Utils.dismissProgressDialog();
+//              }
+//          });
       }
 
 
@@ -214,13 +197,13 @@ String selectedOrderStatus;
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv2);
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv3);
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv4);
-                                } else if (getorderdetailbyidResp.getOrderInfo().getOrderInfo().getOrderStatus().equalsIgnoreCase("Processing")) {
+                                } else if (getorderdetailbyidResp.getOrderInfo().getOrderInfo().getOrderStatus().equalsIgnoreCase("processing")) {
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv1);
                                     mBinding.iv1Line.setBackgroundColor(getResources().getColor(R.color.green_color));
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv2);
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv3);
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv4);
-                                } else if (getorderdetailbyidResp.getOrderInfo().getOrderInfo().getOrderStatus().equalsIgnoreCase("Processed")) {
+                                } else if (getorderdetailbyidResp.getOrderInfo().getOrderInfo().getOrderStatus().equalsIgnoreCase("dispatched")) {
 
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv1);
                                     mBinding.iv1Line.setBackgroundColor(getResources().getColor(R.color.green_color));
@@ -341,13 +324,13 @@ String selectedOrderStatus;
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv2);
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv3);
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv4);
-                                } else if (getorderdetailbyidResp.getOrderInfo().getOrderInfo().getOrderStatus().equalsIgnoreCase("Processing")) {
+                                } else if (getorderdetailbyidResp.getOrderInfo().getOrderInfo().getOrderStatus().equalsIgnoreCase("processing")) {
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv1);
                                     mBinding.iv1Line.setBackgroundColor(getResources().getColor(R.color.green_color));
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv2);
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv3);
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv4);
-                                } else if (getorderdetailbyidResp.getOrderInfo().getOrderInfo().getOrderStatus().equalsIgnoreCase("Processed")) {
+                                } else if (getorderdetailbyidResp.getOrderInfo().getOrderInfo().getOrderStatus().equalsIgnoreCase("dispatched")) {
 
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv1);
                                     mBinding.iv1Line.setBackgroundColor(getResources().getColor(R.color.green_color));
@@ -357,7 +340,7 @@ String selectedOrderStatus;
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv2);
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv3);
                                     Picasso.get().load(R.drawable.ring).into(mBinding.iv4);
-                                } else if (getorderdetailbyidResp.getOrderInfo().getOrderInfo().getOrderStatus().equalsIgnoreCase("Complete")) {
+                                } else if (getorderdetailbyidResp.getOrderInfo().getOrderInfo().getOrderStatus().equalsIgnoreCase("complete")) {
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv1);
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv2);
                                     Picasso.get().load(R.drawable.circle).into(mBinding.iv3);

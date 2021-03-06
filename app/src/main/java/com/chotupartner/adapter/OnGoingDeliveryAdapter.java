@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,11 +23,11 @@ import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 import java.util.List;
 
-public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHolder> {
+public class OnGoingDeliveryAdapter extends RecyclerView.Adapter<OnGoingDeliveryAdapter.ViewHolder> {
 
     private List<OrderInfo> moviesList;
     private LayoutInflater mInflater;
-    private MyOrderAdapter.ItemClickListener mClickListener;
+    private OnGoingDeliveryAdapter.ItemClickListener mClickListener;
     boolean check = true;
     Context context;
     Context cartListActivity;
@@ -36,7 +35,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
     int value = 0, count = 1;
 
     // data is passed into the constructor
-    public MyOrderAdapter(Context cartListActivity, List<OrderInfo> moviesList, ItemClickListener itemClickListener) {
+    public OnGoingDeliveryAdapter(Context cartListActivity, List<OrderInfo> moviesList, ItemClickListener itemClickListener) {
 
         this.moviesList = moviesList;
         this.cartListActivity = cartListActivity;
@@ -45,33 +44,34 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
 
     // inflates the cell layout from xml when needed
     @Override
-    public MyOrderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public OnGoingDeliveryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         this.context = parent.getContext();
         View itemView = LayoutInflater.from(context)
-                .inflate(R.layout.orderrequest, parent, false);
+                .inflate(R.layout.orderrequest_delivery, parent, false);
 
 
-        return new MyOrderAdapter.ViewHolder(itemView);
+        return new OnGoingDeliveryAdapter.ViewHolder(itemView);
     }
 
     // binds the data to the TextView in each cell
     @Override
-    public void onBindViewHolder(@NonNull MyOrderAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull OnGoingDeliveryAdapter.ViewHolder holder, final int position) {
 
 
         //  Picasso.get().load(moviesList.get(position).getProductImg()).into(holder.ivItem);
 
-       // holder.deliverBy.setText("Deliver By "+moviesList.get(position).getOutlet().getOutletName());
+        // holder.deliverBy.setText("Deliver By "+moviesList.get(position).getOutlet().getOutletName());
         holder.tvPrice.setText("Rs " + moviesList.get(position).getAmount());
 
         holder.tvDeliveryChar.setText("Rs " + moviesList.get(position).getDeliveryCharge());
-        holder.deliveryCode.setText(""+moviesList.get(position).getOutlet_otp());
 
-        holder.tvOrderID1.setText(""+moviesList.get(position).getOrderCustomerId());
+        holder.tvOrderID1.setText("" + moviesList.get(position).getOrderCustomerId());
 
         int total = (int) Float.parseFloat(moviesList.get(position).getAmount());
 
+        holder.deliverTv.setVisibility(View.VISIBLE);
+        holder.acceptTV.setVisibility(View.GONE);
 
         if (moviesList.get(position).getOrderStatus().equalsIgnoreCase("Pending")) {
 
@@ -91,7 +91,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             Picasso.get().load(R.drawable.circle).into(holder.iv1);
             holder.iv1Line.setBackgroundColor(context.getResources().getColor(R.color.green_color));
             holder.iv2Line.setBackgroundColor(context.getResources().getColor(R.color.green_color));
-
 
 
             Picasso.get().load(R.drawable.circle).into(holder.iv2);
@@ -118,11 +117,11 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
 
 
         Calendar cl = Calendar.getInstance();
-        cl.setTimeInMillis(Long.parseLong(moviesList.get(position).getSlotBook())*1000);  //here your time in miliseconds
+        cl.setTimeInMillis(Long.parseLong(moviesList.get(position).getSlotBook()) * 1000);  //here your time in miliseconds
         String date = "" + cl.get(Calendar.DAY_OF_MONTH) + "-" + cl.get(Calendar.MONTH) + "-" + cl.get(Calendar.YEAR);
         String time = "" + cl.get(Calendar.HOUR_OF_DAY) + ":" + cl.get(Calendar.MINUTE) + ":" + cl.get(Calendar.SECOND);
 
-        holder.deliveryDate.setText("Placed on " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
+        holder.deliveryDate.setText("Placed on " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook()) * 1000));
 
 //        holder.DeliveryDate.setText("Scheduled for " + date + " " + time);
 
@@ -138,19 +137,18 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         });
 
 
-        holder.rejectTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            itemClickListener.onReject(moviesList.get(position).getOrderId());
-            }
-        });
-
         holder.acceptTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemClickListener.onAccept(moviesList.get(position).getOrderId());
+                itemClickListener.onAcceptPickup(moviesList.get(position).getOrderId(), moviesList.get(position).getOrderCustomerId());
+            }
+        });
 
 
+        holder.deliverTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemClickListener.onDeliveryOrder(moviesList.get(position).getOrderId(), moviesList.get(position).getOrderCustomerId());
             }
         });
 
@@ -171,7 +169,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         public View iv1Line, iv2Line, iv3Line;
 
         RelativeLayout rl;
-        TextView deliveryDate, tvOrderPlaced, tvPrice,deliveryPeronName, acceptTV,rejectTv,deliveryCode,deliveryPersonNumber,tvOrderID1, tvDeliveryChar, totalPaidAmount,paymentMode;
+        TextView deliveryDate, tvOrderPlaced, tvPrice, deliveryPeronName, acceptTV, deliverTv, deliveryCode, deliveryPersonNumber, tvOrderID1, tvDeliveryChar, totalPaidAmount, paymentMode;
         LinearLayout llImage, llOutLetText, llTop;
         Button btnViewDetails;
 
@@ -191,7 +189,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             totalPaidAmount = itemView.findViewById(R.id.totalPaidAmount);
             paymentMode = itemView.findViewById(R.id.paymentMode);
             acceptTV = itemView.findViewById(R.id.acceptTV);
-            rejectTv = itemView.findViewById(R.id.rejectTv);
+            deliverTv = itemView.findViewById(R.id.deliverTv);
             viewOrderDetail = itemView.findViewById(R.id.viewOrderDetail);
 
 
@@ -213,13 +211,14 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
 
 
     // allows clicks events to be caught
-    void setClickListener(MyOrderAdapter.ItemClickListener itemClickListener) {
+    void setClickListener(OnGoingDeliveryAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
-        void onAccept(int orderId);
-        void onReject(int orderId);
+        void onAcceptPickup(int orderId, String orderCustomerId);
+
+        void onDeliveryOrder(int orderId, String orderCustomerId);
     }
 }

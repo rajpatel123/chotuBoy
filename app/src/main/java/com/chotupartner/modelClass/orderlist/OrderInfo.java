@@ -79,6 +79,19 @@ private String deviceType;
 @SerializedName("date_added")
 @Expose
 private String dateAdded;
+
+
+    public String getOutlet_otp() {
+        return outlet_otp;
+    }
+
+    public void setOutlet_otp(String outlet_otp) {
+        this.outlet_otp = outlet_otp;
+    }
+
+    @SerializedName("outlet_otp")
+@Expose
+private String outlet_otp;
 @SerializedName("order_product_id")
 @Expose
 private Integer orderProductId;
@@ -246,6 +259,7 @@ return stateId;
 public void setStateId(Object stateId) {
 this.stateId = stateId;
 }
+
 
 public Integer getDeliveryCharge() {
 return deliveryCharge;

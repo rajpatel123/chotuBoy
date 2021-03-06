@@ -24,11 +24,11 @@ import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 import java.util.List;
 
-public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHolder> {
+public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAdapter.ViewHolder> {
 
     private List<OrderInfo> moviesList;
     private LayoutInflater mInflater;
-    private MyOrderAdapter.ItemClickListener mClickListener;
+    private ConfirmedOrderAdapter.ItemClickListener mClickListener;
     boolean check = true;
     Context context;
     Context cartListActivity;
@@ -36,7 +36,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
     int value = 0, count = 1;
 
     // data is passed into the constructor
-    public MyOrderAdapter(Context cartListActivity, List<OrderInfo> moviesList, ItemClickListener itemClickListener) {
+    public ConfirmedOrderAdapter(Context cartListActivity, List<OrderInfo> moviesList, ItemClickListener itemClickListener) {
 
         this.moviesList = moviesList;
         this.cartListActivity = cartListActivity;
@@ -45,24 +45,24 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
 
     // inflates the cell layout from xml when needed
     @Override
-    public MyOrderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ConfirmedOrderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         this.context = parent.getContext();
         View itemView = LayoutInflater.from(context)
-                .inflate(R.layout.orderrequest, parent, false);
+                .inflate(R.layout.orderrequest_accepted, parent, false);
 
 
-        return new MyOrderAdapter.ViewHolder(itemView);
+        return new ConfirmedOrderAdapter.ViewHolder(itemView);
     }
 
     // binds the data to the TextView in each cell
     @Override
-    public void onBindViewHolder(@NonNull MyOrderAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ConfirmedOrderAdapter.ViewHolder holder, final int position) {
 
 
         //  Picasso.get().load(moviesList.get(position).getProductImg()).into(holder.ivItem);
 
-       // holder.deliverBy.setText("Deliver By "+moviesList.get(position).getOutlet().getOutletName());
+        // holder.deliverBy.setText("Deliver By "+moviesList.get(position).getOutlet().getOutletName());
         holder.tvPrice.setText("Rs " + moviesList.get(position).getAmount());
 
         holder.tvDeliveryChar.setText("Rs " + moviesList.get(position).getDeliveryCharge());
@@ -97,7 +97,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             Picasso.get().load(R.drawable.circle).into(holder.iv2);
             Picasso.get().load(R.drawable.circle).into(holder.iv3);
             Picasso.get().load(R.drawable.ring).into(holder.iv4);
-        } else if (moviesList.get(position).getOrderStatus().equalsIgnoreCase("Complete")) {
+        } else if (moviesList.get(position).getOrderStatus().equalsIgnoreCase("complete")) {
             holder.iv1Line.setBackgroundColor(context.getResources().getColor(R.color.green_color));
             holder.iv2Line.setBackgroundColor(context.getResources().getColor(R.color.green_color));
             holder.iv3Line.setBackgroundColor(context.getResources().getColor(R.color.green_color));
@@ -107,10 +107,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             Picasso.get().load(R.drawable.circle).into(holder.iv3);
             Picasso.get().load(R.drawable.circle).into(holder.iv4);
 
-        } else {
-            holder.llOutLetText.setVisibility(View.GONE);
-
-            holder.llImage.setVisibility(View.GONE);
         }
 
 
@@ -133,23 +129,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
                 Intent iii = new Intent(view.getContext(), OrderDetailsActivity.class);
                 iii.putExtra("orderID", moviesList.get(position).getOrderId());
                 view.getContext().startActivity(iii);
-
-            }
-        });
-
-
-        holder.rejectTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            itemClickListener.onReject(moviesList.get(position).getOrderId());
-            }
-        });
-
-        holder.acceptTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemClickListener.onAccept(moviesList.get(position).getOrderId());
-
 
             }
         });
@@ -213,7 +192,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
 
 
     // allows clicks events to be caught
-    void setClickListener(MyOrderAdapter.ItemClickListener itemClickListener) {
+    void setClickListener(ConfirmedOrderAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

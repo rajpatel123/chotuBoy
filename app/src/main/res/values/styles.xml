@@ -106,7 +106,7 @@
     </style>
 
     <style name="normal_heading_style" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/twenty_20sp</item>
+        <item name="android:textSize">@dimen/twenty_16sp</item>
 
         <item name="fontFamily">@font/product_sans_regular</item>
     </style>
