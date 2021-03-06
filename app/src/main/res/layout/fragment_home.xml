@@ -5,8 +5,70 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="58dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/dp_30"
+                android:paddingEnd="@dimen/dp_30"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/confirmTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_heading_style"
+                    android:textStyle="bold"
+                    android:text="Confirm Orders"/>
+
+                <View
+                    android:id="@+id/cView"
+                    android:layout_width="115dp"
+                    android:layout_height="3dp"
+                    android:visibility="invisible"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@color/green"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/dp_30"
+                android:paddingEnd="@dimen/dp_30"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/pendingTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/normal_heading_style"
+                    android:textStyle="bold"
+
+                    android:text="Orders Requests"/>
+
+                <View
+                    android:id="@+id/oView"
+                    android:layout_width="115dp"
+                    android:layout_height="3dp"
+                    android:visibility="invisible"
+
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@color/green"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/emptyCart"
             android:layout_width="match_parent"
@@ -56,7 +118,15 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerCartView"
+            android:id="@+id/recyclerCartViewConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin_50"
+            />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCartViewPending"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/margin_50"

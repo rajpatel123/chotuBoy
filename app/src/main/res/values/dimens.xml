@@ -304,6 +304,7 @@
 
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="margin_250">300sp</dimen>
+    <dimen name="_15dp">20dp</dimen>
 
 
 </resources>

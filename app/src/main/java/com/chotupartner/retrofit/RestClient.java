@@ -28,18 +28,41 @@ public class RestClient {
     }
 
   public static void getAllOrederForOutLet(RequestBody outlet_id, Callback<OrderListResponse> callback) {
-    RetrofitClient.getClient().GETTING_ORDER_RESPONSE_FOR_OUT_LET_CALL(outlet_id).enqueue(callback);
+    RetrofitClient.getClient().getPendingOrders(outlet_id).enqueue(callback);
   }
 
 
-  public static void getAllOrederForOutLetDelivery(RequestBody outlet_id, Callback<OrderListResponse> callback) {
-    RetrofitClient.getClient().GETTING_ORDER_RESPONSE_FOR_OUT_LET_CALL_Delevery(outlet_id).enqueue(callback);
+  public static void getConfirmedOrders(RequestBody outlet_id, Callback<OrderListResponse> callback) {
+    RetrofitClient.getClient().getConfirmedOrders(outlet_id).enqueue(callback);
+  }
+
+
+  public static void getDeliveryNewOrders(RequestBody outlet_id, Callback<OrderListResponse> callback) {
+    RetrofitClient.getClient().getDeliveryNewOrders(outlet_id).enqueue(callback);
+  }
+
+
+  public static void getDeliveryOngoingOrders(RequestBody outlet_id, Callback<OrderListResponse> callback) {
+    RetrofitClient.getClient().getDeliveryOngoingOrders(outlet_id).enqueue(callback);
+  }
+
+  public static void getAllOrderDelivery(RequestBody outlet_id, Callback<OrderListResponse> callback) {
+    RetrofitClient.getClient().getAllOrderDelivery(outlet_id).enqueue(callback);
+  }
+
+  public static void getAllOrderOutlet(RequestBody outlet_id, Callback<OrderListResponse> callback) {
+    RetrofitClient.getClient().getAllOrderOutlet(outlet_id).enqueue(callback);
   }
 
 
 
-  public static void updateOrderStatus(RequestBody orderId,RequestBody order_status, RequestBody comment,RequestBody otp, Callback<ResponseBody> callback) {
-    RetrofitClient.getClient().updateOrderStatus(orderId,order_status,comment,otp).enqueue(callback);
+  public static void update_order(RequestBody orderId,RequestBody order_status,RequestBody otp,RequestBody comment, Callback<ResponseBody> callback) {
+    RetrofitClient.getClient().update_order(orderId,order_status,otp,comment).enqueue(callback);
+  }
+
+
+  public static void updateOrderStatus(RequestBody outlet_id,RequestBody orderId,RequestBody order_status, Callback<ResponseBody> callback) {
+    RetrofitClient.getClient().updateOrderStatus(outlet_id,orderId,order_status).enqueue(callback);
   }
 
 
