@@ -38,8 +38,8 @@ public class RestClient {
 
 
 
-  public static void updateOrderStatus(RequestBody orderId,RequestBody order_status, RequestBody comment, Callback<ResponseBody> callback) {
-    RetrofitClient.getClient().updateOrderStatus(orderId,order_status,comment).enqueue(callback);
+  public static void updateOrderStatus(RequestBody orderId,RequestBody order_status, RequestBody comment,RequestBody otp, Callback<ResponseBody> callback) {
+    RetrofitClient.getClient().updateOrderStatus(orderId,order_status,comment,otp).enqueue(callback);
   }
 
 
