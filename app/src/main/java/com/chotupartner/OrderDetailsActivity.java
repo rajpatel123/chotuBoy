@@ -114,8 +114,8 @@ String selectedOrderStatus;
           RequestBody orderID1 = RequestBody.create(MediaType.parse("text/plain"), ""+orderID);
           RequestBody comment = RequestBody.create(MediaType.parse("text/plain"), ""+comments);
 
-
-          RestClient.updateOrderStatus(orderID1, status, comment, new Callback<ResponseBody>() {
+          RequestBody otp = RequestBody.create(MediaType.parse("text/plain"), ""+comments);
+          RestClient.updateOrderStatus(orderID1, status, comment,otp, new Callback<ResponseBody>() {
               @Override
               public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Utils.dismissProgressDialog();

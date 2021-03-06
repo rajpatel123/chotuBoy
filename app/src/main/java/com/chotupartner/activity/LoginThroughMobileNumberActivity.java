@@ -1,6 +1,7 @@
 package com.chotupartner.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import com.chotupartner.retrofit.RestClient;
 import com.chotupartner.utils.ChotuBoyPrefs;
 import com.chotupartner.utils.Constants;
 import com.chotupartner.utils.Utils;
+import com.google.android.material.snackbar.Snackbar;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -71,7 +73,7 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
                     }
 
 
-                   // Toast.makeText(getApplicationContext(), genderrg.getText().toString(), Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(), genderrg.getText().toString(), Toast.LENGTH_SHORT).show();
                     ChotuBoyPrefs.putString(getApplicationContext(), Constants.USERTYPE, userType);
 
                 }
@@ -85,7 +87,10 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
         mobileNo = edtTxtMobNo.getText().toString().trim();
 
         if (mobileNo.isEmpty() || edtTxtMobNo.length() < 10) {
-            edtTxtMobNo.setError(" Enter a valid phone number ");
+
+            Snackbar.make(findViewById(android.R.id.content), "Enter a valid phone number ", Snackbar.LENGTH_LONG)
+                    .setActionTextColor(Color.WHITE)
+                    .show();
             check = false;
         } else {
             edtTxtMobNo.setError(null);
@@ -123,6 +128,14 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                             Toast.makeText(LoginThroughMobileNumberActivity.this, "Pls verify Otp!", Toast.LENGTH_SHORT).show();
+                        }else if(response.body().getStatus().equalsIgnoreCase("false")){
+                            Snackbar.make(findViewById(android.R.id.content), "We are unable to find your account at Chotu Grocery, Please contact to support", Snackbar.LENGTH_LONG)
+                                    .setActionTextColor(Color.WHITE)
+                                    .show();
+                        }else {
+                            Snackbar.make(findViewById(android.R.id.content), "Something went wrong!!", Snackbar.LENGTH_LONG)
+                                    .setActionTextColor(Color.WHITE)
+                                    .show();
                         }
 
                     }
