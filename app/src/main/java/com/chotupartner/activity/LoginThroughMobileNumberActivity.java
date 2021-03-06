@@ -2,16 +2,26 @@ package com.chotupartner.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.chotupartner.R;
 import com.chotupartner.modelClass.login.LoginWithOtpResponse;
 import com.chotupartner.retrofit.RestClient;
@@ -30,6 +40,7 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
     public EditText edtTxtMobNo;
     public Button btnSendOtp;
     private String mobileNo;
+    ImageView imageViewbackGroundImage;
     public RadioGroup radioGroup_User;
     public RadioButton rdBtnDelivery_Boy, rdBtnOutLet;
     private String userType;
@@ -43,7 +54,26 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
         btnSendOtp = findViewById(R.id.btnSendOtp);
         rdBtnDelivery_Boy = findViewById(R.id.RdBtnDeliveryBoy);
         rdBtnOutLet = findViewById(R.id.RdBtnOutLet);
+        imageViewbackGroundImage= findViewById(R.id.backGroundImage);
         radioGroup_User = findViewById(R.id.userTypeRdGp);
+
+        Glide.with(LoginThroughMobileNumberActivity.this)
+                .load(R.drawable.login_screen_background)
+
+                .addListener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        return false;
+                    }
+                }).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .skipMemoryCache(true)
+                 // scale to fit entire image within ImageView
+                .into(imageViewbackGroundImage);
 
 
         selectUserType();
@@ -67,8 +97,43 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
                 if (null != genderrg) {
                     userType = genderrg.getText().toString();
                     if (userType.equalsIgnoreCase("Delivery Partner")){
+                        Glide.with(LoginThroughMobileNumberActivity.this)
+                                .load(R.drawable.grocery_offers_img)
+
+                                .addListener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        return false;
+                                    }
+                                }).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .skipMemoryCache(true)
+                                 // scale to fit entire image within ImageView
+                                .into(imageViewbackGroundImage);
                         userType="2";
                     }else{
+
+                        Glide.with(LoginThroughMobileNumberActivity.this)
+                                .load(R.drawable.grocery_image_item)
+
+                                .addListener(new RequestListener<Drawable>() {
+                                    @Override
+                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                        return false;
+                                    }
+                                }).diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .skipMemoryCache(true)
+                                // scale to fit entire image within ImageView
+                                .into(imageViewbackGroundImage);
                         userType="3";
                     }
 
