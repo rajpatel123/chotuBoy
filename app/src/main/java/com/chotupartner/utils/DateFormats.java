@@ -8,7 +8,7 @@ import java.util.TimeZone;
 
 public class DateFormats {
     public static String homeDateFormat(long milies) {
-        SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy", Locale.US);
+        SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy hh:mm a", Locale.US);
 
         return df.format(new Date(milies));
     }

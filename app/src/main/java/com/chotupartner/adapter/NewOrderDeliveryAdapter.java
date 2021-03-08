@@ -2,6 +2,7 @@ package com.chotupartner.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +71,16 @@ public class NewOrderDeliveryAdapter extends RecyclerView.Adapter<NewOrderDelive
         holder.tvOrderID1.setText("" + moviesList.get(position).getOrderCustomerId());
 
         int total = (int) Float.parseFloat(moviesList.get(position).getAmount());
+        if (!TextUtils.isEmpty(moviesList.get(position).getDelivery_name())) {
+            holder.deliveryPeronName.setText("" + moviesList.get(position).getDelivery_name());
+            holder.deliveryPersonNumber.setText("" + moviesList.get(position).getContact_no());
+            holder.contactType.setText("Outlet Name: ");
+        } else {
+            holder.deliveryPeronName.setText("" + moviesList.get(position).getOutlet_name());
+            holder.deliveryPersonNumber.setText("" + moviesList.get(position).getOutlet_no());
+            holder.contactType.setText("Delivery Person : ");
+
+        }
 
 
         if (moviesList.get(position).getOrderStatus().equalsIgnoreCase("Pending")) {
@@ -162,7 +173,7 @@ public class NewOrderDeliveryAdapter extends RecyclerView.Adapter<NewOrderDelive
         public View iv1Line, iv2Line, iv3Line;
 
         RelativeLayout rl;
-        TextView tvOrderPlaced,deliveryTime, tvPrice, deliveryPeronName, acceptTV, deliveryCode, deliverTv, deliveryPersonNumber, tvOrderID1, tvDeliveryChar, totalPaidAmount, paymentMode;
+        TextView tvOrderPlaced,deliveryTime, contactType,tvPrice, deliveryPeronName, acceptTV, deliveryCode, deliverTv, deliveryPersonNumber, tvOrderID1, tvDeliveryChar, totalPaidAmount, paymentMode;
         LinearLayout llImage, llOutLetText, llTop;
         Button btnViewDetails;
 
@@ -176,6 +187,7 @@ public class NewOrderDeliveryAdapter extends RecyclerView.Adapter<NewOrderDelive
             deliveryPeronName = itemView.findViewById(R.id.deliveryPeronName);
             deliveryPersonNumber = itemView.findViewById(R.id.deliveryPersonNumber);
             deliverTv = itemView.findViewById(R.id.deliverTv);
+            contactType = itemView.findViewById(R.id.contactType);
 
 
             tvPrice = itemView.findViewById(R.id.tvPrice);

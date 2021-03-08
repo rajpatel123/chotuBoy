@@ -2,6 +2,7 @@ package com.chotupartner.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,11 +115,18 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         }
 
         holder.tvOrderPlaced.setText("ORDER Placed on :" + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
-        holder.deliveryTime.setText("Delivery Date :" + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
 
         holder.totalPaidAmount.setText("Rs " + total);
+        if (!TextUtils.isEmpty(moviesList.get(position).getDelivery_name())) {
+            holder.deliveryPeronName.setText("" + moviesList.get(position).getDelivery_name());
+            holder.deliveryPersonNumber.setText("" + moviesList.get(position).getContact_no());
+            holder.contactType.setText("Delivery Person :");
+        } else {
+            holder.deliveryPeronName.setText("" + moviesList.get(position).getOutlet_name());
+            holder.deliveryPersonNumber.setText("" + moviesList.get(position).getOutlet_no());
+            holder.contactType.setText("Outlet Name: ");
 
-
+        }
         Calendar cl = Calendar.getInstance();
         cl.setTimeInMillis(Long.parseLong(moviesList.get(position).getSlotBook())*1000);  //here your time in miliseconds
         String date = "" + cl.get(Calendar.DAY_OF_MONTH) + "-" + cl.get(Calendar.MONTH) + "-" + cl.get(Calendar.YEAR);
@@ -171,7 +179,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         public View iv1Line, iv2Line, iv3Line;
 
         RelativeLayout rl;
-        TextView  tvOrderPlaced,deliveryTime, tvPrice,deliveryPeronName, acceptTV,rejectTv,deliveryCode,deliveryPersonNumber,tvOrderID1, tvDeliveryChar, totalPaidAmount,paymentMode;
+        TextView  tvOrderPlaced,deliveryTime, contactType,tvPrice,deliveryPeronName, acceptTV,rejectTv,deliveryCode,deliveryPersonNumber,tvOrderID1, tvDeliveryChar, totalPaidAmount,paymentMode;
         LinearLayout llImage, llOutLetText, llTop;
         Button btnViewDetails;
 
@@ -184,6 +192,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             deliveryTime = itemView.findViewById(R.id.deliveryTime);
             deliveryPeronName = itemView.findViewById(R.id.deliveryPeronName);
             deliveryPersonNumber = itemView.findViewById(R.id.deliveryPersonNumber);
+            contactType = itemView.findViewById(R.id.contactType);
 
             tvPrice = itemView.findViewById(R.id.tvPrice);
             tvDeliveryChar = itemView.findViewById(R.id.tvDeliveryChar);

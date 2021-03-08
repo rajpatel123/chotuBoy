@@ -62,7 +62,6 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         holder.tvOrdderName1.setText(moviesList.get(position).getProductTitle());
 
         holder.tvOrderDate1.setText("Rs " + moviesList.get(position).getPrice());
-        holder.tvOrderDate1.setText("Rs " + moviesList.get(position).getPrice());
         holder.qtyNumber.setText(" " + moviesList.get(position).getQuantity());
 
         Picasso.get().load(moviesList.get(position).getImage()).into(holder.ivImage);

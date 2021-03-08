@@ -32,6 +32,10 @@ import com.chotupartner.retrofit.RestClient;
 import com.chotupartner.utils.ChotuBoyPrefs;
 import com.chotupartner.utils.Utils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 import okhttp3.MediaType;
@@ -318,6 +322,8 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                                 mBinding.recyclerCartViewConfirm.setVisibility(View.VISIBLE);
                                 orderInfos.addAll(cartInfoList.getOrderInfo());
                                 mBinding.recyclerCartViewConfirm.setVisibility(View.VISIBLE);
+                                mBinding.emptyCart.setVisibility(View.GONE);
+
                                 OnGoingDeliveryAdapter horizontalAdapter = new OnGoingDeliveryAdapter(getActivity(), orderInfos, HomeFragment.this);
                                 LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                                 mBinding.recyclerCartViewConfirm.setLayoutManager(horizontalLayoutManagaer);
@@ -465,7 +471,6 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
 
                 if (!TextUtils.isEmpty(verifyPinEdtText.getText().toString())) {
                     if (type.equalsIgnoreCase("pickup")){
-                        dialog.dismiss();
                         verifPickupyOTp(verifyPinEdtText.getText().toString(), orderId);
                     }else{
                         dialog.dismiss();
@@ -505,7 +510,21 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                 Utils.dismissProgressDialog();
                 if (response != null && response.code() == 200 && response.body() != null) {
                     if (response.body() != null) {
-                        getDeliveryOngoingOrders();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.body().string());
+                            if (jsonObject.optString("status").equalsIgnoreCase("Success")){
+                                dialog.dismiss();
+                                getDeliveryOngoingOrders();
+                            }else{
+                                Toast.makeText(dashBoardActivity, "Please enter valid otp", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                     } else {
                         Toast.makeText(dashBoardActivity, "Please enter valid otp", Toast.LENGTH_SHORT).show();
                     }
@@ -538,7 +557,21 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                 Utils.dismissProgressDialog();
                 if (response != null && response.code() == 200 && response.body() != null) {
                     if (response.body() != null) {
-                        getDeliveryOngoingOrders();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.body().string());
+                            if (jsonObject.optString("status").equalsIgnoreCase("Success")){
+                                dialog.dismiss();
+                                getDeliveryOngoingOrders();
+                            }else{
+                                Toast.makeText(dashBoardActivity, "Please enter valid otp", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                     } else {
                         Toast.makeText(dashBoardActivity, "Please enter valid otp", Toast.LENGTH_SHORT).show();
                     }
