@@ -372,7 +372,7 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                     if (response.body() != null) {
                         orderInfos.clear();
                         if (response.body() != null) {
-                            getConfirmedOrders();
+                            getPendingOrders();
                         }
                     } else {
                         mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
@@ -411,7 +411,7 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                     if (response.body() != null) {
                         orderInfos.clear();
                         if (response.body() != null) {
-                            getConfirmedOrders();
+                            getPendingOrders();
 
                         }
                     } else {
@@ -445,7 +445,7 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
 
     @Override
     public void onDeliveryOrder(int orderId,String orderCustomerId) {
-        pickupOrderDialog(orderId, orderCustomerId, "Outlet Order Delivery Code","delivery");
+        pickupOrderDialog(orderId, orderCustomerId, "Customer Order Delivery Code","delivery");
 
     }
 
@@ -514,7 +514,7 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                             JSONObject jsonObject = new JSONObject(response.body().string());
                             if (jsonObject.optString("status").equalsIgnoreCase("Success")){
                                 dialog.dismiss();
-                                getDeliveryOngoingOrders();
+                                getDeliveryNewOrders();
                             }else{
                                 Toast.makeText(dashBoardActivity, "Please enter valid otp", Toast.LENGTH_SHORT).show();
 

@@ -2,6 +2,7 @@ package com.chotupartner.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,6 +74,17 @@ public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAd
         holder.tvOrderID1.setText(""+moviesList.get(position).getOrderCustomerId());
         holder.deliveryPeronName.setText("" + moviesList.get(position).getDelivery_name());
         holder.deliveryPersonNumber.setText(" " + moviesList.get(position).getContact_no());
+
+
+        holder.callImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_CALL);
+//                intent.setData(Uri.parse("tel:" + moviesList.get(position).getContact_no()));
+//                context.startActivity(intent);
+            }
+        });
+
         int total = (int) Float.parseFloat(moviesList.get(position).getAmount());
 
 
@@ -163,7 +175,7 @@ public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAd
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView viewOrderDetail, iv1, iv2, iv3, iv4;
+        public ImageView   callImg, viewOrderDetail, iv1, iv2, iv3, iv4;
         public View iv1Line, iv2Line, iv3Line;
 
         RelativeLayout rl;
@@ -175,6 +187,7 @@ public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAd
             super(itemView);
 
 
+            callImg = itemView.findViewById(R.id.callToUser);
             deliveryCode = itemView.findViewById(R.id.deliveryCode);
             tvOrderPlaced = itemView.findViewById(R.id.tvOrderPlaced);
             contactType = itemView.findViewById(R.id.contactType);

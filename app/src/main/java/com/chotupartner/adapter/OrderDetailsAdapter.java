@@ -1,5 +1,7 @@
 package com.chotupartner.adapter;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder> {
+public class    OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder> {
 
     private List<OrderProduct> moviesList;
     private LayoutInflater mInflater;
@@ -59,6 +61,10 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
            holder.tvOrdderNuber.setText("Rs " + discountPrice);
            holder.rlDiscount.setVisibility(View.VISIBLE);
        }
+
+
+
+
         holder.tvOrdderName1.setText(moviesList.get(position).getProductTitle());
 
         holder.tvOrderDate1.setText("Rs " + moviesList.get(position).getPrice());
@@ -77,7 +83,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView ivItem, ivImage;
+        public ImageView  ivImage;
         RelativeLayout rlDiscount;
         TextView tvOrdderNuber, tvOrdderName1, qtyNumber,tvOrderDate1, DeliveryDate1;
         LinearLayout llTop;

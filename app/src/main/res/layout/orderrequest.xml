@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".activity.DashBoardActivity">
 
@@ -85,6 +85,8 @@
 
 
             <LinearLayout
+                android:id="@+id/delveryLL"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -102,7 +104,7 @@
 
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
@@ -132,6 +134,12 @@
                         android:textColor="@color/black"
                         tools:ignore="RtlCompat" />
                 </LinearLayout>
+                <ImageView
+                    android:id="@+id/callToUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_call"/>
             </LinearLayout>
 
 
@@ -161,7 +169,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="Order ID:"
-                    android:textColor="@color/grey" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tvOrderID1"
@@ -174,7 +182,7 @@
                     android:paddingEnd="10dp"
                     android:text=" 00.00 "
                     android:textAlignment="textEnd"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     tools:ignore="RtlCompat" />
             </LinearLayout>
             <LinearLayout
@@ -190,7 +198,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="Order Amount:"
-                    android:textColor="@color/grey" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tvPrice"
@@ -203,7 +211,7 @@
                     android:paddingEnd="10dp"
                     android:text=" 00.00 "
                     android:textAlignment="textEnd"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     tools:ignore="RtlCompat" />
             </LinearLayout>
 
@@ -219,7 +227,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="Dlivery Charge:"
-                    android:textColor="@color/grey" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tvDeliveryChar"
@@ -232,7 +240,7 @@
                     android:paddingEnd="10dp"
                     android:text=" 00.00 "
                     android:textAlignment="textEnd"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/black"
                     tools:ignore="RtlCompat" />
             </LinearLayout>
 

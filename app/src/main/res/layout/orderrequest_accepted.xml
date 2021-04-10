@@ -99,12 +99,10 @@
                     android:text="Deliver Person:"
                     style="@style/heading_style"
                     android:textColor="@color/green" />
-
-
-
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/hundred_100"
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/deliveryPeronName"
@@ -133,6 +131,13 @@
                         android:textColor="@color/black"
                         tools:ignore="RtlCompat" />
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/callToUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_call"/>
             </LinearLayout>
 
 

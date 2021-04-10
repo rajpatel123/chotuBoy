@@ -29,6 +29,7 @@
                     android:layout_height="wrap_content"
                     style="@style/normal_heading_style"
                     android:textStyle="bold"
+                    android:textSize="14sp"
                     android:text="Confirm Orders"/>
 
                 <View
@@ -54,6 +55,8 @@
                     android:layout_height="wrap_content"
                     style="@style/normal_heading_style"
                     android:textStyle="bold"
+                    android:textSize="14sp"
+
 
                     android:text="Orders Requests"/>
 

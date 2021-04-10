@@ -180,13 +180,14 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
 
         RelativeLayout rl;
         TextView  tvOrderPlaced,deliveryTime, contactType,tvPrice,deliveryPeronName, acceptTV,rejectTv,deliveryCode,deliveryPersonNumber,tvOrderID1, tvDeliveryChar, totalPaidAmount,paymentMode;
-        LinearLayout llImage, llOutLetText, llTop;
+        LinearLayout llImage, llOutLetText, delveryLL;
         Button btnViewDetails;
 
         ViewHolder(View itemView) {
             super(itemView);
 
 
+            delveryLL = itemView.findViewById(R.id.delveryLL);
             deliveryCode = itemView.findViewById(R.id.deliveryCode);
             tvOrderPlaced = itemView.findViewById(R.id.tvOrderPlaced);
             deliveryTime = itemView.findViewById(R.id.deliveryTime);
