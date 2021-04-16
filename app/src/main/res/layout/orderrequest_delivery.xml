@@ -301,6 +301,35 @@
                     android:textColor="@color/black"
                     tools:ignore="RtlCompat" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="Delivery Address"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/addressTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:paddingEnd="10dp"
+                    android:text=""
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorPrimaryDark"
+                    tools:ignore="RtlCompat" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -480,6 +509,7 @@
                 android:layout_weight="1"
                 android:background="@color/grey"
                 />
+
 
 
             <LinearLayout

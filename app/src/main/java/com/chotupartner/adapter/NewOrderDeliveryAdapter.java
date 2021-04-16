@@ -82,6 +82,11 @@ public class NewOrderDeliveryAdapter extends RecyclerView.Adapter<NewOrderDelive
 
         }
 
+        String deliveryDetails=""+moviesList.get(position).getFirstname()+" "+(!TextUtils.isEmpty(moviesList.get(position).getLastname())?""+moviesList.get(position).getLastname():"")
+                +"\n"+moviesList.get(position).getPhone()+"\n"+moviesList.get(position).getAddress()+"\n"+
+                moviesList.get(position).getCity();
+        holder.addressTv.setText(""+deliveryDetails);
+
 
         if (moviesList.get(position).getOrderStatus().equalsIgnoreCase("Pending")) {
 
@@ -173,7 +178,7 @@ public class NewOrderDeliveryAdapter extends RecyclerView.Adapter<NewOrderDelive
         public View iv1Line, iv2Line, iv3Line;
 
         RelativeLayout rl;
-        TextView tvOrderPlaced,deliveryTime, contactType,tvPrice, deliveryPeronName, acceptTV, deliveryCode, deliverTv, deliveryPersonNumber, tvOrderID1, tvDeliveryChar, totalPaidAmount, paymentMode;
+        TextView tvOrderPlaced,deliveryTime, addressTv,contactType,tvPrice, deliveryPeronName, acceptTV, deliveryCode, deliverTv, deliveryPersonNumber, tvOrderID1, tvDeliveryChar, totalPaidAmount, paymentMode;
         LinearLayout llImage, llOutLetText, llTop;
         Button btnViewDetails;
 
@@ -188,6 +193,7 @@ public class NewOrderDeliveryAdapter extends RecyclerView.Adapter<NewOrderDelive
             deliveryPersonNumber = itemView.findViewById(R.id.deliveryPersonNumber);
             deliverTv = itemView.findViewById(R.id.deliverTv);
             contactType = itemView.findViewById(R.id.contactType);
+            addressTv = itemView.findViewById(R.id.addressTv);
 
 
             tvPrice = itemView.findViewById(R.id.tvPrice);

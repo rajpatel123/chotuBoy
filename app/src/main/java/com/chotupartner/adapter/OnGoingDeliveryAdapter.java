@@ -70,6 +70,10 @@ public class OnGoingDeliveryAdapter extends RecyclerView.Adapter<OnGoingDelivery
         holder.tvOrderID1.setText("" + moviesList.get(position).getOrderCustomerId());
 
         int total = (int) Float.parseFloat(moviesList.get(position).getAmount());
+        String deliveryDetails=""+moviesList.get(position).getFirstname()+" "+(!TextUtils.isEmpty(moviesList.get(position).getLastname())?""+moviesList.get(position).getLastname():"")
+                +"\n"+moviesList.get(position).getPhone()+"\n"+moviesList.get(position).getAddress()+"\n"+
+                moviesList.get(position).getCity();
+        holder.addressTv.setText(""+deliveryDetails);
 
         holder.deliverTv.setVisibility(View.VISIBLE);
         holder.acceptTV.setVisibility(View.GONE);
@@ -184,7 +188,7 @@ public class OnGoingDeliveryAdapter extends RecyclerView.Adapter<OnGoingDelivery
         public View iv1Line, iv2Line, iv3Line;
 
         RelativeLayout rl;
-        TextView deliveryDate, tvOrderPlaced, deliveryTime, contactType, tvPrice, deliveryPeronName, acceptTV, deliverTv, deliveryCode, deliveryPersonNumber, tvOrderID1, tvDeliveryChar, totalPaidAmount, paymentMode;
+        TextView deliveryDate, addressTv,tvOrderPlaced, deliveryTime, contactType, tvPrice, deliveryPeronName, acceptTV, deliverTv, deliveryCode, deliveryPersonNumber, tvOrderID1, tvDeliveryChar, totalPaidAmount, paymentMode;
         LinearLayout llImage, llOutLetText, llTop;
         Button btnViewDetails;
 
@@ -197,6 +201,7 @@ public class OnGoingDeliveryAdapter extends RecyclerView.Adapter<OnGoingDelivery
             contactType = itemView.findViewById(R.id.contactType);
             deliveryTime = itemView.findViewById(R.id.deliveryTime);
             deliveryPeronName = itemView.findViewById(R.id.deliveryPeronName);
+            addressTv = itemView.findViewById(R.id.addressTv);
             deliveryPersonNumber = itemView.findViewById(R.id.deliveryPersonNumber);
 
             tvPrice = itemView.findViewById(R.id.tvPrice);

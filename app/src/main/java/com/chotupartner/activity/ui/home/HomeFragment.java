@@ -50,7 +50,10 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
 
 
     private HomeViewModel homeViewModel;
-    ArrayList<OrderInfo> orderInfos = new ArrayList<>();
+    ArrayList<OrderInfo> orderInfosOn = new ArrayList<>();
+    ArrayList<OrderInfo> orderInfosNew = new ArrayList<>();
+    ArrayList<OrderInfo> orderInfosOND = new ArrayList<>();
+    ArrayList<OrderInfo> orderInfosNewD = new ArrayList<>();
     FragmentHomeBinding mBinding;
 
     DashBoardActivity dashBoardActivity;
@@ -138,17 +141,20 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                 public void onResponse(Call<OrderListResponse> call, Response<OrderListResponse> response) {
                     Utils.dismissProgressDialog();
                     if (response.body().getStatus()) {
-                        orderInfos.clear();
                         if (response.body() != null) {
                             OrderListResponse cartInfoList = response.body();
 
                             if (cartInfoList.getOrderInfo() != null && cartInfoList.getOrderInfo().size() > 0) {
+                                orderInfosOn.clear();
                                 mBinding.recyclerCartViewConfirm.setVisibility(View.VISIBLE);
+                                mBinding.cView.setVisibility(View.VISIBLE);
+                                mBinding.oView.setVisibility(View.GONE);
+
                                 mBinding.recyclerCartViewPending.setVisibility(View.GONE);
                                 mBinding.emptyCart.setVisibility(View.GONE);
 
-                                orderInfos.addAll(cartInfoList.getOrderInfo());
-                                ConfirmedOrderAdapter horizontalAdapter = new ConfirmedOrderAdapter(getActivity(), orderInfos, HomeFragment.this);
+                                orderInfosOn.addAll(cartInfoList.getOrderInfo());
+                                ConfirmedOrderAdapter horizontalAdapter = new ConfirmedOrderAdapter(getActivity(), orderInfosOn, HomeFragment.this);
                                 LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                                 mBinding.recyclerCartViewConfirm.setLayoutManager(horizontalLayoutManagaer);
                                 mBinding.recyclerCartViewConfirm.setAdapter(horizontalAdapter);
@@ -199,17 +205,20 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                 public void onResponse(Call<OrderListResponse> call, Response<OrderListResponse> response) {
                     Utils.dismissProgressDialog();
                     if (response.body().getStatus()) {
-                        orderInfos.clear();
                         if (response.body() != null) {
                             OrderListResponse cartInfoList = response.body();
 
                             if (cartInfoList.getOrderInfo() != null && cartInfoList.getOrderInfo().size() > 0) {
+                                orderInfosNew.clear();
+                                mBinding.cView.setVisibility(View.GONE);
+                                mBinding.oView.setVisibility(View.VISIBLE);
+
                                 mBinding.recyclerCartViewPending.setVisibility(View.VISIBLE);
-                                orderInfos.addAll(cartInfoList.getOrderInfo());
+                                orderInfosNew.addAll(cartInfoList.getOrderInfo());
                                 mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
                                 mBinding.emptyCart.setVisibility(View.GONE);
 
-                                MyOrderAdapter horizontalAdapter = new MyOrderAdapter(getActivity(), orderInfos, HomeFragment.this);
+                                MyOrderAdapter horizontalAdapter = new MyOrderAdapter(getActivity(), orderInfosNew, HomeFragment.this);
                                 LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                                 mBinding.recyclerCartViewPending.setLayoutManager(horizontalLayoutManagaer);
                                 mBinding.recyclerCartViewPending.setAdapter(horizontalAdapter);
@@ -257,17 +266,20 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                 public void onResponse(Call<OrderListResponse> call, Response<OrderListResponse> response) {
                     Utils.dismissProgressDialog();
                     if (response.body().getStatus()) {
-                        orderInfos.clear();
                         if (response.body() != null) {
                             OrderListResponse cartInfoList = response.body();
 
                             if (cartInfoList.getOrderInfo() != null && cartInfoList.getOrderInfo().size() > 0) {
+                                orderInfosNewD.clear();
                                 mBinding.recyclerCartViewPending.setVisibility(View.VISIBLE);
-                                orderInfos.addAll(cartInfoList.getOrderInfo());
+                                mBinding.cView.setVisibility(View.GONE);
+                                mBinding.oView.setVisibility(View.VISIBLE);
+
+                                orderInfosNewD.addAll(cartInfoList.getOrderInfo());
                                 mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
                                 mBinding.emptyCart.setVisibility(View.GONE);
 
-                                NewOrderDeliveryAdapter horizontalAdapter = new NewOrderDeliveryAdapter(getActivity(), orderInfos, HomeFragment.this);
+                                NewOrderDeliveryAdapter horizontalAdapter = new NewOrderDeliveryAdapter(getActivity(), orderInfosNewD, HomeFragment.this);
                                 LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                                 mBinding.recyclerCartViewPending.setLayoutManager(horizontalLayoutManagaer);
                                 mBinding.recyclerCartViewPending.setAdapter(horizontalAdapter);
@@ -314,17 +326,20 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                 public void onResponse(Call<OrderListResponse> call, Response<OrderListResponse> response) {
                     Utils.dismissProgressDialog();
                     if (response.body().getStatus()) {
-                        orderInfos.clear();
                         if (response.body() != null) {
                             OrderListResponse cartInfoList = response.body();
 
                             if (cartInfoList.getOrderInfo() != null && cartInfoList.getOrderInfo().size() > 0) {
+                                orderInfosOND.clear();
                                 mBinding.recyclerCartViewConfirm.setVisibility(View.VISIBLE);
-                                orderInfos.addAll(cartInfoList.getOrderInfo());
+                                mBinding.cView.setVisibility(View.VISIBLE);
+                                mBinding.oView.setVisibility(View.GONE);
+
+                                orderInfosOND.addAll(cartInfoList.getOrderInfo());
                                 mBinding.recyclerCartViewConfirm.setVisibility(View.VISIBLE);
                                 mBinding.emptyCart.setVisibility(View.GONE);
 
-                                OnGoingDeliveryAdapter horizontalAdapter = new OnGoingDeliveryAdapter(getActivity(), orderInfos, HomeFragment.this);
+                                OnGoingDeliveryAdapter horizontalAdapter = new OnGoingDeliveryAdapter(getActivity(), orderInfosOND, HomeFragment.this);
                                 LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                                 mBinding.recyclerCartViewConfirm.setLayoutManager(horizontalLayoutManagaer);
                                 mBinding.recyclerCartViewConfirm.setAdapter(horizontalAdapter);
@@ -370,7 +385,7 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Utils.dismissProgressDialog();
                     if (response.body() != null) {
-                        orderInfos.clear();
+                       // orderInfos.clear();
                         if (response.body() != null) {
                             getPendingOrders();
                         }
@@ -409,11 +424,7 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Utils.dismissProgressDialog();
                     if (response.body() != null) {
-                        orderInfos.clear();
-                        if (response.body() != null) {
-                            getPendingOrders();
-
-                        }
+                        getPendingOrders();
                     } else {
                         mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
                         mBinding.emptyCart.setVisibility(View.VISIBLE);
