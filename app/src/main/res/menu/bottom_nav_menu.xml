@@ -11,6 +11,11 @@
         android:icon="@drawable/ic_history_default"
         android:title="@string/title_dashboard" />
 
+ <item
+        android:id="@+id/navigation_product"
+        android:icon="@drawable/ic_store_default"
+        android:title="@string/title_product" />
+
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_profile_default"

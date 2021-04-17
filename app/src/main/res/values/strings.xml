@@ -95,6 +95,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">History</string>
     <string name="title_notifications">Profile</string>
+    <string name="title_product">Store</string>
 
     <string-array name="order_statusfor_outlet">
         <item>Select Order Status</item>

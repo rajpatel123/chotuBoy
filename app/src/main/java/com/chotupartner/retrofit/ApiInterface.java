@@ -1,10 +1,13 @@
 package com.chotupartner.retrofit;
 
+import com.chotupartner.activity.ui.store.ProductOnOutlet;
 import com.chotupartner.modelClass.delivery.DeliveryPartnerResponse;
 import com.chotupartner.modelClass.forOutLet.GetorderdetailbyidResp;
 import com.chotupartner.modelClass.forOutLet.OutletLoginModel;
 import com.chotupartner.modelClass.login.LoginWithOtpResponse;
 import com.chotupartner.modelClass.orderlist.OrderListResponse;
+
+import java.util.List;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -50,6 +53,16 @@ public interface ApiInterface {
     @POST("ApiData/getOngoingOrders")
     Call<OrderListResponse> getConfirmedOrders(@Part("outlet_id") RequestBody outlet_id);
 
+
+    @Multipart
+    @POST("ApiData/getOutletProduct")
+    Call<List<ProductOnOutlet>> getOutletProduct(@Part("outlet_id") RequestBody outlet_id);
+
+
+    @Multipart
+    @POST("ApiData/getProductWithoutOutletid")
+    Call<List<ProductOnOutlet>> getOutletProductNtAvailable(@Part("outlet_id") RequestBody outlet_id);
+
     @Multipart
     @POST("ApiData/getDeliveryNewOrders")
     Call<OrderListResponse> getDeliveryNewOrders(@Part("delivery_id") RequestBody outlet_id);
@@ -58,7 +71,6 @@ public interface ApiInterface {
     @Multipart
     @POST("ApiData/getDeliveryOngoingOrders")
     Call<OrderListResponse> getDeliveryOngoingOrders(@Part("delivery_id") RequestBody outlet_id);
-
 
 
     @Multipart
@@ -83,12 +95,22 @@ public interface ApiInterface {
 
     @Multipart
     @POST("ApiData/updateOrderStatus")
-    Call<ResponseBody> updateOrderStatus(@Part("outlet_id") RequestBody outletId,@Part("order_id") RequestBody customer_id, @Part("order_status") RequestBody order_status);
+    Call<ResponseBody> updateOrderStatus(@Part("outlet_id") RequestBody outletId, @Part("order_id") RequestBody customer_id, @Part("order_status") RequestBody order_status);
+
+
+    @Multipart
+    @POST("ApiData/updateOutletProduct")
+    Call<ResponseBody> updateProductAvailability(@Part("outlet_id") RequestBody outletId,
+                                                 @Part("product_id") RequestBody product_id,
+                                                 @Part("mrp") RequestBody mrp,
+                                                 @Part("discount_price") RequestBody discount_price,
+                                                 @Part("discount") RequestBody discount,
+                                                 @Part("availability") RequestBody availability);
 
 
     @Multipart
     @POST("ApiData/update_order")
-    Call<ResponseBody> update_order(@Part("order_id") RequestBody customer_id, @Part("order_status") RequestBody order_status,  @Part("otp") RequestBody otp,@Part("comment") RequestBody comment);
+    Call<ResponseBody> update_order(@Part("order_id") RequestBody customer_id, @Part("order_status") RequestBody order_status, @Part("otp") RequestBody otp, @Part("comment") RequestBody comment);
 
 
 //    @Multipart

@@ -1,11 +1,15 @@
 package com.chotupartner.retrofit;
 
+import com.chotupartner.activity.ui.store.ProductOnOutlet;
+import com.chotupartner.adapter.ProductAdapter;
 import com.chotupartner.modelClass.delivery.DeliveryPartnerResponse;
 import com.chotupartner.modelClass.forOutLet.GetorderdetailbyidResp;
 import com.chotupartner.modelClass.forOutLet.OutletLoginModel;
 import com.chotupartner.modelClass.login.LoginWithOtpResponse;
 import com.chotupartner.modelClass.orderlist.OrderListResponse;
 import com.chotupartner.modelClass.otpVerify.VerifyOtpResponse;
+
+import java.util.List;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -36,6 +40,14 @@ public class RestClient {
     RetrofitClient.getClient().getConfirmedOrders(outlet_id).enqueue(callback);
   }
 
+  public static void getOutletProduct(RequestBody outlet_id, Callback<List<ProductOnOutlet>> callback) {
+    RetrofitClient.getClient().getOutletProduct(outlet_id).enqueue(callback);
+  }
+
+  public static void getOutletProductNtAvailable(RequestBody outlet_id, Callback<List<ProductOnOutlet>> callback) {
+    RetrofitClient.getClient().getOutletProductNtAvailable(outlet_id).enqueue(callback);
+  }
+
 
   public static void getDeliveryNewOrders(RequestBody outlet_id, Callback<OrderListResponse> callback) {
     RetrofitClient.getClient().getDeliveryNewOrders(outlet_id).enqueue(callback);
@@ -63,6 +75,11 @@ public class RestClient {
 
   public static void updateOrderStatus(RequestBody outlet_id,RequestBody orderId,RequestBody order_status, Callback<ResponseBody> callback) {
     RetrofitClient.getClient().updateOrderStatus(outlet_id,orderId,order_status).enqueue(callback);
+  }
+
+
+ public static void updateProductAvailability(RequestBody outlet_id,RequestBody productId,RequestBody mrp,RequestBody d_price,RequestBody discount,RequestBody availability, Callback<ResponseBody> callback) {
+    RetrofitClient.getClient().updateProductAvailability(outlet_id,productId,mrp,d_price,discount,availability).enqueue(callback);
   }
 
 
