@@ -25,8 +25,8 @@
 
                 <ImageView
                     android:id="@+id/imagePlaceHolder"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     app:srcCompat="@drawable/place_holder_img" />
 
                 <TextView

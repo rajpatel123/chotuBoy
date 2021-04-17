@@ -3,11 +3,17 @@ package com.chotupartner.activity.ui.store;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,25 +60,29 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
         mBinding.cView.setVisibility(View.VISIBLE);
         mBinding.oView.setVisibility(View.GONE);
 
-        mBinding.confirmTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBinding.cView.setVisibility(View.VISIBLE);
-                mBinding.oView.setVisibility(View.GONE);
-                getAvailableProduct();
-            }
-        });
+        if (!TextUtils.isEmpty(ChotuBoyPrefs.getString(getActivity(), "outlet_id"))){
+            mBinding.confirmTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mBinding.cView.setVisibility(View.VISIBLE);
+                    mBinding.oView.setVisibility(View.GONE);
+                    getAvailableProduct();
+                }
+            });
 
 
-        mBinding.pendingTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBinding.cView.setVisibility(View.GONE);
-                mBinding.oView.setVisibility(View.VISIBLE);
-                getNotAvailableProduct();
-            }
-        });
+            mBinding.pendingTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mBinding.cView.setVisibility(View.GONE);
+                    mBinding.oView.setVisibility(View.VISIBLE);
+                    getNotAvailableProduct();
+                }
+            });
 
+            getAvailableProduct();
+
+        }
 
         return view;
 
@@ -89,7 +99,6 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
     @Override
     public void onResume() {
         super.onResume();
-        getAvailableProduct();
 
     }
 
@@ -214,145 +223,145 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
         }
     }
 
+    private void pickupOrderDialog(ProductOnOutlet productOnOutlet) {
 
-//    @Override
-//    public void on(int orderId) {
-//        RequestBody outletID = RequestBody.create(MediaType.parse("text/plain"), ChotuBoyPrefs.getString(getActivity(), "outlet_id"));
-//        RequestBody orderID = RequestBody.create(MediaType.parse("text/plain"), "" + orderId);
-//        RequestBody statusBody = RequestBody.create(MediaType.parse("text/plain"), "processing");
-//        if (Utils.isInternetConnected(getActivity())) {
-//            Utils.showProgressDialog(getActivity());
-//            RestClient.updateOrderStatus(outletID, orderID, statusBody, new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                    Utils.dismissProgressDialog();
-//                    if (response.body() != null) {
-//                       // orderInfos.clear();
-//                        if (response.body() != null) {
-//                            getPendingOrders();
-//                        }
-//                    } else {
-//                        mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
-//                        mBinding.emptyCart.setVisibility(View.VISIBLE);
-//
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
-//                    mBinding.emptyCart.setVisibility(View.VISIBLE);
-//                    Log.d("tag", "onFailure: ");
-//                    Utils.dismissProgressDialog();
-//                    // Toast.makeText(CartListActivity.this, "" + getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        } else {
-//            Utils.dismissProgressDialog();
-//            Toast.makeText(getActivity(), "Internet Connection Failed!!", Toast.LENGTH_SHORT).show();
-//        }
-//
-//    }
+        AlertDialog.Builder builder = new AlertDialog.Builder(dashBoardActivity);
+        View view = LayoutInflater.from(dashBoardActivity).inflate(R.layout.edit_product, null);
+
+        Button verifyOTp = view.findViewById(R.id.verifyOTp);
+        TextView productName = view.findViewById(R.id.productName);
+        ImageView imageHolder = view.findViewById(R.id.imagePlaceHolder);
+        EditText mrp = view.findViewById(R.id.mrpEdt);
+        EditText sellmrp = view.findViewById(R.id.sellingPrice);
+        EditText discount = view.findViewById(R.id.discount);
+        productName.setText(productOnOutlet.getProductName());
+        if (TextUtils.isEmpty(productOnOutlet.getMrp())) {
+            mrp.setText("" + productOnOutlet.getPrice());
+            sellmrp.setText("" + (!TextUtils.isEmpty(productOnOutlet.getDiscountPrice()) ? productOnOutlet.getDiscountPrice() : "0"));
+        } else {
+            mrp.setText("" + productOnOutlet.getMrp());
+            sellmrp.setText("" + productOnOutlet.getDiscountPrice());
+        }
+
+        sellmrp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
-//    private void pickupOrderDialog(int orderId, String orderCustomerId, String title, String type) {
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(dashBoardActivity);
-//        View view = LayoutInflater.from(dashBoardActivity).inflate(R.layout.enter_otp_dialog, null);
-//
-//        Button verifyOTp = view.findViewById(R.id.verifyOTp);
-//        TextView dialogTitle = view.findViewById(R.id.dialogTitle);
-//        TextView orderIdTV = view.findViewById(R.id.orderId);
-//        EditText verifyPinEdtText = view.findViewById(R.id.verifyPinEdtTxt);
-//
-//        dialogTitle.setText("" + title);
-//        orderIdTV.setText("Order ID : " + orderCustomerId);
-//        ImageView crossBtn = view.findViewById(R.id.closeDialog);
-//        builder.setCancelable(false);
-//        builder.setView(view);
-//
-//        verifyOTp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                if (!TextUtils.isEmpty(verifyPinEdtText.getText().toString())) {
-//                    if (type.equalsIgnoreCase("pickup")){
-//                        verifPickupyOTp(verifyPinEdtText.getText().toString(), orderId);
-//                    }else{
-//                        dialog.dismiss();
-//                        verifDeliveredOTp(verifyPinEdtText.getText().toString(),orderId);
-//                    }
-//                } else {
-//                    Toast.makeText(dashBoardActivity, "Please enter otp from outlet", Toast.LENGTH_SHORT).show();
-//                }
-//
-//
-//            }
-//        });
-//
-//
-//        crossBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-//
-//        dialog = builder.create();
-//        dialog.show();
-//    }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!TextUtils.isEmpty(s.toString())) {
+
+                    discount.setText("" + getDiscount(mrp.getText().toString(), s.toString()));
+                }
+
+            }
+        });
+
+        discount.setText("" + getDiscount(mrp.getText().toString(), sellmrp.getText().toString()));
+        ImageView crossBtn = view.findViewById(R.id.closeDialog);
+        builder.setCancelable(false);
+        builder.setView(view);
+
+        verifyOTp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                if (TextUtils.isEmpty(productOnOutlet.getProductid())){
+                    productOnOutlet.setProductid(productOnOutlet.getProduct_id());
+                }
+                productOnOutlet.setMrp(mrp.getText().toString());
+                productOnOutlet.setDiscountPrice(sellmrp.getText().toString());
+                productOnOutlet.setDiscount(discount.getText().toString());
+                updateAvailable(productOnOutlet,"1");
+            }
+        });
+
+
+        crossBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    private int getDiscount(String mrp, String sellingprice) {
+        if (!TextUtils.isEmpty(mrp) && !mrp.equalsIgnoreCase("0") && !TextUtils.isEmpty(sellingprice) && !sellingprice.equalsIgnoreCase("0")) {
+            if (Integer.parseInt(mrp) >= Integer.parseInt(sellingprice)) {
+                return ((Integer.parseInt(mrp) - Integer.parseInt(sellingprice)) * 100) / Integer.parseInt(mrp);
+
+            } else {
+                Toast.makeText(getActivity(), "Selling price should be less than MRP", Toast.LENGTH_LONG).show();
+                return 0;
+            }
+        } else
+            return 0;
+
+
+    }
 
 
     @Override
     public void updateAvailable(ProductOnOutlet productOnOutlet, String available) {
-        if (TextUtils.isEmpty(productOnOutlet.getDiscountPrice())) {
+        if (TextUtils.isEmpty(productOnOutlet.getDiscountPrice()) || productOnOutlet.getDiscountPrice().equalsIgnoreCase("0")) {
             Toast.makeText(getActivity(), "Please update selling price first", Toast.LENGTH_LONG).show();
             return;
         }
 
-//        RequestBody outletID = RequestBody.create(MediaType.parse("text/plain"), ChotuBoyPrefs.getString(getActivity(), "outlet_id"));
-//        RequestBody productId = RequestBody.create(MediaType.parse("text/plain"), "" + productOnOutlet.getId());
-//        RequestBody mrp = RequestBody.create(MediaType.parse("text/plain"), "" + (!TextUtils.isEmpty(productOnOutlet.getMrp()) ? productOnOutlet.getMrp() : productOnOutlet.getPrice()));
-//        RequestBody d_price = RequestBody.create(MediaType.parse("text/plain"), "" + productOnOutlet.getDiscountPrice());
-//        RequestBody discount = RequestBody.create(MediaType.parse("text/plain"), "" + productOnOutlet.getDiscount());
-//        RequestBody availability = RequestBody.create(MediaType.parse("text/plain"), available);
-//        if (Utils.isInternetConnected(getActivity())) {
-//            Utils.showProgressDialog(getActivity());
-//            RestClient.updateProductAvailability(outletID, productId, mrp, d_price, discount, availability, new Callback<ResponseBody>() {
-//                @Override
-//                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                    Utils.dismissProgressDialog();
-//                    if (response.body() != null) {
-//                        if (available.equalsIgnoreCase("1")) {
-//                            getNotAvailableProduct();
-//                        } else {
-//                            getAvailableProduct();
-//                        }
-//                    } else {
-//                        mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
-//                        mBinding.emptyCart.setVisibility(View.VISIBLE);
-//
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                    mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
-//                    mBinding.emptyCart.setVisibility(View.VISIBLE);
-//                    Log.d("tag", "onFailure: ");
-//                    Utils.dismissProgressDialog();
-//                    // Toast.makeText(CartListActivity.this, "" + getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        } else {
-//            Utils.dismissProgressDialog();
-//            Toast.makeText(getActivity(), "Internet Connection Failed!!", Toast.LENGTH_SHORT).show();
-//        }
+        RequestBody outletID = RequestBody.create(MediaType.parse("text/plain"), ChotuBoyPrefs.getString(getActivity(), "outlet_id"));
+        RequestBody productId = RequestBody.create(MediaType.parse("text/plain"), "" + productOnOutlet.getProductid());
+        RequestBody mrp = RequestBody.create(MediaType.parse("text/plain"), "" + (!TextUtils.isEmpty(productOnOutlet.getMrp()) ? productOnOutlet.getMrp() : productOnOutlet.getPrice()));
+        RequestBody d_price = RequestBody.create(MediaType.parse("text/plain"), "" + productOnOutlet.getDiscountPrice());
+        RequestBody discount = RequestBody.create(MediaType.parse("text/plain"), "" + productOnOutlet.getDiscount());
+        RequestBody availability = RequestBody.create(MediaType.parse("text/plain"), available);
+        if (Utils.isInternetConnected(getActivity())) {
+            Utils.showProgressDialog(getActivity());
+            RestClient.updateProductAvailability(outletID, productId, mrp, d_price, discount, availability, new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Utils.dismissProgressDialog();
+                    if (response.body() != null) {
+                        if (available.equalsIgnoreCase("1")) {
+                            getNotAvailableProduct();
+                        } else {
+                            getAvailableProduct();
+                        }
+                    } else {
+                        mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
+                        mBinding.emptyCart.setVisibility(View.VISIBLE);
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
+                    mBinding.emptyCart.setVisibility(View.VISIBLE);
+                    Log.d("tag", "onFailure: ");
+                    Utils.dismissProgressDialog();
+                    // Toast.makeText(CartListActivity.this, "" + getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Utils.dismissProgressDialog();
+            Toast.makeText(getActivity(), "Internet Connection Failed!!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onEdit(ProductOnOutlet productOnOutlet) {
-        //pickupOrderDialog("Customer Order Delivery Code","delivery");
+        pickupOrderDialog(productOnOutlet);
     }
 }
