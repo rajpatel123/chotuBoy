@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import com.chotupartner.retrofit.RestClient;
 import com.chotupartner.utils.ChotuBoyPrefs;
 import com.chotupartner.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -47,6 +49,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
     FragmentStoreBinding mBinding;
 
     DashBoardActivity dashBoardActivity;
+    List<ProductOnOutlet> productOnOutletList;
     private AlertDialog dialog;
     private ProductAdapter productAdapter;
 
@@ -71,6 +74,9 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
             });
 
 
+            // listening to search query text change
+
+
             mBinding.pendingTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -80,7 +86,25 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
                 }
             });
 
+
             getAvailableProduct();
+
+            mBinding.edtSearch.addTextChangedListener ( new TextWatcher () {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    filter ( editable.toString () );
+                }
+            } );
 
         }
 
@@ -88,7 +112,19 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
 
 
     }
-
+    void filter(String text) {
+        ArrayList <ProductOnOutlet> temp = new ArrayList();
+        for (ProductOnOutlet d : productOnOutletList) {
+            if (d.getProductName ().toLowerCase ().contains ( text.toLowerCase () )) {
+                temp.add ( d );
+            }
+        }
+        productAdapter = new ProductAdapter(getActivity(), temp, StoreFragment.this);
+        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mBinding.recyclerCartViewConfirm.setLayoutManager(horizontalLayoutManagaer);
+        productAdapter.notifyDataSetChanged();
+        mBinding.recyclerCartViewConfirm.setAdapter(productAdapter);
+    }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -114,7 +150,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
                     Utils.dismissProgressDialog();
                     if (response.code() == 200) {
                         if (response.body() != null) {
-                            List<ProductOnOutlet> productOnOutletList = response.body();
+                             productOnOutletList = response.body();
 
                             if (productOnOutletList != null && productOnOutletList.size() > 0) {
                                 mBinding.recyclerCartViewConfirm.setVisibility(View.VISIBLE);

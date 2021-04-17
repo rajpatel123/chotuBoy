@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -36,12 +38,15 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
     private List<ProductOnOutlet> productOnOutlet;
+    private List<ProductOnOutlet> productOnOutletFilter;
+
     private LayoutInflater mInflater;
     private ProductAdapter.ItemClickListener mClickListener;
     boolean check = true;
@@ -55,6 +60,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         this.productOnOutlet = productOnOutlet;
         this.cartListActivity = cartListActivity;
         this.itemClickListener = itemClickListener;
+        this.productOnOutletFilter=productOnOutlet;
     }
 
     // inflates the cell layout from xml when needed
@@ -79,26 +85,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
        // holder.deliverBy.setText("Deliver By "+moviesList.get(position).getOutlet().getOutletName());
 
 
-        holder.productName.setText("" + productOnOutlet.get(position).getProductName());
-        if (TextUtils.isEmpty(productOnOutlet.get(position).getMrp())){
-            holder.mrp.setText("Rs " + productOnOutlet.get(position).getPrice());
-            holder.finalPrice.setText("Rs " + (!TextUtils.isEmpty(productOnOutlet.get(position).getDiscountPrice())?productOnOutlet.get(position).getDiscountPrice():"0"));
+
+        holder.productName.setText("" + productOnOutletFilter.get(position).getProductName());
+        if (TextUtils.isEmpty(productOnOutletFilter.get(position).getMrp())){
+            holder.mrp.setText("Rs " + productOnOutletFilter.get(position).getPrice());
+            holder.finalPrice.setText("Rs " + (!TextUtils.isEmpty(productOnOutletFilter.get(position).getDiscountPrice())?productOnOutletFilter.get(position).getDiscountPrice():"0"));
             holder.discount.setText(""+0);
             holder.checkbox.setVisibility(View.GONE);
             holder.checkbox.setImageResource(R.drawable.ic_check_normal);
         }else{
-            holder.mrp.setText("Rs " + productOnOutlet.get(position).getMrp());
-            holder.finalPrice.setText("Rs " + productOnOutlet.get(position).getDiscountPrice());
-            holder.discount.setText(""+productOnOutlet.get(position).getDiscount());
+            holder.mrp.setText("Rs " + productOnOutletFilter.get(position).getMrp());
+            holder.finalPrice.setText("Rs " + productOnOutletFilter.get(position).getDiscountPrice());
+            holder.discount.setText(""+productOnOutletFilter.get(position).getDiscount());
             holder.checkbox.setImageResource(R.drawable.ic_check_selected);
             holder.checkbox.setVisibility(View.VISIBLE);
         }
 
-        if (!TextUtils.isEmpty(productOnOutlet.get(position).getProductImages()) && productOnOutlet.get(position).getProductImages().length()>5){
+        if (!TextUtils.isEmpty(productOnOutletFilter.get(position).getProductImages()) && productOnOutletFilter.get(position).getProductImages().length()>5){
 
             JSONArray jsonArray = null;
             try {
-                jsonArray = new JSONArray(productOnOutlet.get(position).getProductImages());
+                jsonArray = new JSONArray(productOnOutletFilter.get(position).getProductImages());
                 String imagePath = BuildConfig.API_SERVER_IP+"assets/uploads/product/"+jsonArray.get(0);
                 Log.d("Path", ""+imagePath);
                 Glide.with(context)
@@ -157,6 +164,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public int getItemCount() {
         return productOnOutlet.size();
     }
+
+
+
 
 
     // stores and recycles views as they are scrolled off screen
