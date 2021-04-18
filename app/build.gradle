@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 def uatKeystorePropertiesFile = rootProject.file("release_signing.properties")
 def uatKeystoreProperties = new Properties()
