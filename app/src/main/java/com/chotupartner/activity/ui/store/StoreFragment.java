@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -102,7 +101,14 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
 
                 @Override
                 public void afterTextChanged(Editable editable) {
-                    filter ( editable.toString () );
+                    if (editable.toString().length() > 2) {
+                        if (mBinding.recyclerCartViewConfirm.getVisibility() == View.VISIBLE) {
+                            filter(editable.toString());
+                        } else {
+                            filter2(editable.toString());
+
+                        }
+                    }
                 }
             } );
 
@@ -124,6 +130,20 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
         mBinding.recyclerCartViewConfirm.setLayoutManager(horizontalLayoutManagaer);
         productAdapter.notifyDataSetChanged();
         mBinding.recyclerCartViewConfirm.setAdapter(productAdapter);
+    }
+
+    void filter2(String text) {
+        ArrayList <ProductOnOutlet> temp1 = new ArrayList();
+        for (ProductOnOutlet d : productOnOutletList) {
+            if (d.getProductName ().toLowerCase ().contains ( text.toLowerCase () )) {
+                temp1.add ( d );
+            }
+        }
+        productAdapter = new ProductAdapter(getActivity(), temp1, StoreFragment.this);
+        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mBinding.recyclerCartViewPending.setLayoutManager(horizontalLayoutManagaer);
+        productAdapter.notifyDataSetChanged();
+        mBinding.recyclerCartViewPending.setAdapter(productAdapter);
     }
 
     @Override
@@ -156,7 +176,6 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
                                 mBinding.recyclerCartViewConfirm.setVisibility(View.VISIBLE);
                                 mBinding.cView.setVisibility(View.VISIBLE);
                                 mBinding.oView.setVisibility(View.GONE);
-
                                 mBinding.recyclerCartViewPending.setVisibility(View.GONE);
                                 mBinding.emptyCart.setVisibility(View.GONE);
 
@@ -259,7 +278,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
         }
     }
 
-    private void pickupOrderDialog(ProductOnOutlet productOnOutlet) {
+    private void pickupOrderDialog(ProductOnOutlet productOnOutlet, int position) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(dashBoardActivity);
         View view = LayoutInflater.from(dashBoardActivity).inflate(R.layout.edit_product, null);
@@ -316,7 +335,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
                 productOnOutlet.setMrp(mrp.getText().toString());
                 productOnOutlet.setDiscountPrice(sellmrp.getText().toString());
                 productOnOutlet.setDiscount(discount.getText().toString());
-                updateAvailable(productOnOutlet,"1");
+                updateAvailable(productOnOutlet,"1",position);
             }
         });
 
@@ -350,7 +369,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
 
 
     @Override
-    public void updateAvailable(ProductOnOutlet productOnOutlet, String available) {
+    public void updateAvailable(ProductOnOutlet productOnOutlet, String available, int position) {
         if (TextUtils.isEmpty(productOnOutlet.getDiscountPrice()) || productOnOutlet.getDiscountPrice().equalsIgnoreCase("0")) {
             Toast.makeText(getActivity(), "Please update selling price first", Toast.LENGTH_LONG).show();
             return;
@@ -370,9 +389,12 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
                     Utils.dismissProgressDialog();
                     if (response.body() != null) {
                         if (available.equalsIgnoreCase("1")) {
-                            getNotAvailableProduct();
+                            productAdapter.notifyItemChanged(position, productOnOutlet);
+                          //  getNotAvailableProduct();
                         } else {
-                            getAvailableProduct();
+                            productAdapter.notifyItemChanged(position, productOnOutlet);
+
+                            // getAvailableProduct();
                         }
                     } else {
                         mBinding.recyclerCartViewConfirm.setVisibility(View.GONE);
@@ -397,7 +419,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
     }
 
     @Override
-    public void onEdit(ProductOnOutlet productOnOutlet) {
-        pickupOrderDialog(productOnOutlet);
+    public void onEdit(ProductOnOutlet productOnOutlet, int position) {
+        pickupOrderDialog(productOnOutlet,position);
     }
 }

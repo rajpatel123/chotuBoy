@@ -1,20 +1,13 @@
 package com.chotupartner.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,18 +21,12 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.chotupartner.BuildConfig;
-import com.chotupartner.OrderDetailsActivity;
 import com.chotupartner.R;
 import com.chotupartner.activity.ui.store.ProductOnOutlet;
-import com.chotupartner.modelClass.orderlist.OrderInfo;
-import com.chotupartner.utils.Utils;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
@@ -142,9 +129,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             @Override
             public void onClick(View view) {
                  if (!TextUtils.isEmpty(productOnOutlet.get(position).getAvailability()) && productOnOutlet.get(position).getAvailability().equalsIgnoreCase("1")){
-                     itemClickListener.updateAvailable(productOnOutlet.get(position),"0");
+                     itemClickListener.updateAvailable(productOnOutlet.get(position),"0", position);
                  }else{
-                     itemClickListener.updateAvailable(productOnOutlet.get(position),"1");
+                     itemClickListener.updateAvailable(productOnOutlet.get(position),"1", position);
                  }
             }
         });
@@ -152,7 +139,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.editproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemClickListener.onEdit(productOnOutlet.get(position));
+                itemClickListener.onEdit(productOnOutlet.get(position),position);
 
 
             }
@@ -198,7 +185,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
-        void updateAvailable(ProductOnOutlet productOnOutlet, String available);
-        void onEdit(ProductOnOutlet productOnOutlet);
+        void updateAvailable(ProductOnOutlet productOnOutlet, String available, int position);
+        void onEdit(ProductOnOutlet productOnOutlet,int position);
     }
 }
