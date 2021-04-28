@@ -9,6 +9,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
@@ -21,24 +22,24 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
-
 
     private static final String TAG = MyFirebaseServiceMessaging.class.getName();
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         JSONObject jsonObject = new JSONObject();
 
-
+        Intent filter = new Intent("custom.notification.navigation");
+        sendBroadcast(filter);
 
         if (remoteMessage.getData().size() > 0) {
             try {
                 jsonObject.put("message", remoteMessage.getData().get("message"));
                 Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-                sendNotification(jsonObject,"type", "New Order recived");
+
+
+                sendNotification(jsonObject,"type", "New Order received");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -59,8 +60,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         //intent.putExtra(Constants.PUSH_NEW_BOOKING_TRIP_DATA_KEY, data);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        Intent filter = new Intent("custom.notification.navigation");
-        sendBroadcast(filter);
+
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "PUSH");
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
@@ -115,5 +115,10 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     }
 
 
+    @Override
+    public void onNewToken(@NonNull String s) {
+        super.onNewToken(s);
+        Log.d("token", ""+s);
+    }
 }
 

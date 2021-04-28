@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,7 +29,10 @@ import com.chotupartner.retrofit.RestClient;
 import com.chotupartner.utils.ChotuBoyPrefs;
 import com.chotupartner.utils.Constants;
 import com.chotupartner.utils.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -36,6 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginThroughMobileNumberActivity extends AppCompatActivity {
+    private static final String TAG = "FCM";
     public EditText edtTxtMobNo;
     public Button btnSendOtp;
     private String mobileNo;
@@ -55,6 +61,8 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
         rdBtnOutLet = findViewById(R.id.RdBtnOutLet);
         imageViewbackGroundImage = findViewById(R.id.backGroundImage);
         radioGroup_User = findViewById(R.id.userTypeRdGp);
+
+
         selectUserType();
 
         btnSendOtp.setOnClickListener(new View.OnClickListener() {
@@ -153,5 +161,8 @@ public class LoginThroughMobileNumberActivity extends AppCompatActivity {
 
         }
     }
+
+
+
 
 }

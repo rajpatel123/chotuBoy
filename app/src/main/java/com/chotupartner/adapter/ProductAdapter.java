@@ -27,11 +27,11 @@ import com.chotupartner.activity.ui.store.ProductOnOutlet;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
 
-    private List<ProductOnOutlet> productOnOutlet;
     private List<ProductOnOutlet> productOnOutletFilter;
 
     private LayoutInflater mInflater;
@@ -44,7 +44,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     // data is passed into the constructor
     public ProductAdapter(Context cartListActivity, List<ProductOnOutlet> productOnOutlet, ItemClickListener itemClickListener) {
-        this.productOnOutlet = productOnOutlet;
         this.cartListActivity = cartListActivity;
         this.itemClickListener = itemClickListener;
         this.productOnOutletFilter=productOnOutlet;
@@ -128,10 +127,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 if (!TextUtils.isEmpty(productOnOutlet.get(position).getAvailability()) && productOnOutlet.get(position).getAvailability().equalsIgnoreCase("1")){
-                     itemClickListener.updateAvailable(productOnOutlet.get(position),"0", position);
+                 if (!TextUtils.isEmpty(productOnOutletFilter.get(position).getAvailability()) && productOnOutletFilter.get(position).getAvailability().equalsIgnoreCase("1")){
+                     itemClickListener.updateAvailable(productOnOutletFilter.get(position),"0", position);
                  }else{
-                     itemClickListener.updateAvailable(productOnOutlet.get(position),"1", position);
+                     itemClickListener.updateAvailable(productOnOutletFilter.get(position),"1", position);
                  }
             }
         });
@@ -139,7 +138,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.editproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemClickListener.onEdit(productOnOutlet.get(position),position);
+                itemClickListener.onEdit(productOnOutletFilter.get(position),position);
 
 
             }
@@ -149,11 +148,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     // total number of cells
     @Override
     public int getItemCount() {
-        return productOnOutlet.size();
+        return productOnOutletFilter.size();
     }
 
-
-
+    public void setData(ArrayList<ProductOnOutlet> temp) {
+        this.productOnOutletFilter= temp;
+        notifyDataSetChanged();
+    }
 
 
     // stores and recycles views as they are scrolled off screen

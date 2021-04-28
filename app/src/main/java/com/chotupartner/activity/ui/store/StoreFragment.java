@@ -51,6 +51,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
     List<ProductOnOutlet> productOnOutletList;
     private AlertDialog dialog;
     private ProductAdapter productAdapter;
+    private ProductAdapter productAdapter1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
         mBinding.cView.setVisibility(View.VISIBLE);
         mBinding.oView.setVisibility(View.GONE);
 
-        if (!TextUtils.isEmpty(ChotuBoyPrefs.getString(getActivity(), "outlet_id"))){
+        if (!TextUtils.isEmpty(ChotuBoyPrefs.getString(getActivity(), "outlet_id"))) {
             mBinding.confirmTv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -88,7 +89,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
 
             getAvailableProduct();
 
-            mBinding.edtSearch.addTextChangedListener ( new TextWatcher () {
+            mBinding.edtSearch.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -110,7 +111,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
                         }
                     }
                 }
-            } );
+            });
 
         }
 
@@ -118,32 +119,34 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
 
 
     }
+
     void filter(String text) {
-        ArrayList <ProductOnOutlet> temp = new ArrayList();
+        ArrayList<ProductOnOutlet> temp = new ArrayList();
         for (ProductOnOutlet d : productOnOutletList) {
-            if (d.getProductName ().toLowerCase ().contains ( text.toLowerCase () )) {
-                temp.add ( d );
+            if (d.getProductName().toLowerCase().contains(text.toLowerCase())) {
+                if (!temp.contains(d))
+                    temp.add(d);
             }
         }
-        productAdapter = new ProductAdapter(getActivity(), temp, StoreFragment.this);
-        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mBinding.recyclerCartViewConfirm.setLayoutManager(horizontalLayoutManagaer);
-        productAdapter.notifyDataSetChanged();
-        mBinding.recyclerCartViewConfirm.setAdapter(productAdapter);
+//        productAdapter = new ProductAdapter(getActivity(), temp, StoreFragment.this);
+//        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+//        mBinding.recyclerCartViewConfirm.setLayoutManager(horizontalLayoutManagaer);
+//        mBinding.recyclerCartViewConfirm.setAdapter(productAdapter);
+        productAdapter.setData(temp);
+
     }
 
     void filter2(String text) {
-        ArrayList <ProductOnOutlet> temp1 = new ArrayList();
+        ArrayList<ProductOnOutlet> temp1 = new ArrayList();
         for (ProductOnOutlet d : productOnOutletList) {
-            if (d.getProductName ().toLowerCase ().contains ( text.toLowerCase () )) {
-                temp1.add ( d );
+            if (d.getProductName().toLowerCase().contains(text.toLowerCase())) {
+                temp1.add(d);
             }
         }
-        productAdapter = new ProductAdapter(getActivity(), temp1, StoreFragment.this);
-        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mBinding.recyclerCartViewPending.setLayoutManager(horizontalLayoutManagaer);
-        productAdapter.notifyDataSetChanged();
-        mBinding.recyclerCartViewPending.setAdapter(productAdapter);
+//        productAdapter = new ProductAdapter(getActivity(), temp1, StoreFragment.this);
+//        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+//        mBinding.recyclerCartViewPending.setLayoutManager(horizontalLayoutManagaer);
+        productAdapter.setData(temp1);
     }
 
     @Override
@@ -170,7 +173,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
                     Utils.dismissProgressDialog();
                     if (response.code() == 200) {
                         if (response.body() != null) {
-                             productOnOutletList = response.body();
+                            productOnOutletList = response.body();
 
                             if (productOnOutletList != null && productOnOutletList.size() > 0) {
                                 mBinding.recyclerCartViewConfirm.setVisibility(View.VISIBLE);
@@ -329,13 +332,13 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                if (TextUtils.isEmpty(productOnOutlet.getProductid())){
+                if (TextUtils.isEmpty(productOnOutlet.getProductid())) {
                     productOnOutlet.setProductid(productOnOutlet.getProduct_id());
                 }
                 productOnOutlet.setMrp(mrp.getText().toString());
                 productOnOutlet.setDiscountPrice(sellmrp.getText().toString());
                 productOnOutlet.setDiscount(discount.getText().toString());
-                updateAvailable(productOnOutlet,"1",position);
+                updateAvailable(productOnOutlet, "1", position);
             }
         });
 
@@ -390,7 +393,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
                     if (response.body() != null) {
                         if (available.equalsIgnoreCase("1")) {
                             productAdapter.notifyItemChanged(position, productOnOutlet);
-                          //  getNotAvailableProduct();
+                            //  getNotAvailableProduct();
                         } else {
                             productAdapter.notifyItemChanged(position, productOnOutlet);
 
@@ -420,6 +423,6 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
 
     @Override
     public void onEdit(ProductOnOutlet productOnOutlet, int position) {
-        pickupOrderDialog(productOnOutlet,position);
+        pickupOrderDialog(productOnOutlet, position);
     }
 }

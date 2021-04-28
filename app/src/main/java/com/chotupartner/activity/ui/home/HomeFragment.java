@@ -1,7 +1,10 @@
 package com.chotupartner.activity.ui.home;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,7 +50,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickListener, ConfirmedOrderAdapter.ItemClickListener, NewOrderDeliveryAdapter.ItemClickListener , OnGoingDeliveryAdapter.ItemClickListener {
+public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickListener, ConfirmedOrderAdapter.ItemClickListener, NewOrderDeliveryAdapter.ItemClickListener, OnGoingDeliveryAdapter.ItemClickListener {
 
 
     private HomeViewModel homeViewModel;
@@ -110,6 +114,22 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         dashBoardActivity = (DashBoardActivity) getActivity();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("custom.notification.navigation");
+        dashBoardActivity.registerReceiver(broadcastReceiver, filter);
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        dashBoardActivity.unregisterReceiver(broadcastReceiver);
     }
 
     @Override
@@ -385,7 +405,7 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Utils.dismissProgressDialog();
                     if (response.body() != null) {
-                       // orderInfos.clear();
+                        // orderInfos.clear();
                         if (response.body() != null) {
                             getPendingOrders();
                         }
@@ -450,13 +470,13 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
 
     @Override
     public void onAcceptPickup(int orderId, String orderCustomerId) {
-        pickupOrderDialog(orderId,orderCustomerId,"Outlet Order Delivery Code","pickup");
+        pickupOrderDialog(orderId, orderCustomerId, "Outlet Order Delivery Code", "pickup");
 
     }
 
     @Override
-    public void onDeliveryOrder(int orderId,String orderCustomerId) {
-        pickupOrderDialog(orderId, orderCustomerId, "Customer Order Delivery Code","delivery");
+    public void onDeliveryOrder(int orderId, String orderCustomerId) {
+        pickupOrderDialog(orderId, orderCustomerId, "Customer Order Delivery Code", "delivery");
 
     }
 
@@ -481,11 +501,11 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
             public void onClick(View view) {
 
                 if (!TextUtils.isEmpty(verifyPinEdtText.getText().toString())) {
-                    if (type.equalsIgnoreCase("pickup")){
+                    if (type.equalsIgnoreCase("pickup")) {
                         verifPickupyOTp(verifyPinEdtText.getText().toString(), orderId);
-                    }else{
+                    } else {
                         dialog.dismiss();
-                        verifDeliveredOTp(verifyPinEdtText.getText().toString(),orderId);
+                        verifDeliveredOTp(verifyPinEdtText.getText().toString(), orderId);
                     }
                 } else {
                     Toast.makeText(dashBoardActivity, "Please enter otp from outlet", Toast.LENGTH_SHORT).show();
@@ -515,7 +535,7 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
         RequestBody comment = RequestBody.create(MediaType.parse("text/plain"), "dispatched");
 
         Utils.showProgressDialog(dashBoardActivity);
-        RestClient.update_order(orderID, status,otpBody, comment,new Callback<ResponseBody>() {
+        RestClient.update_order(orderID, status, otpBody, comment, new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Utils.dismissProgressDialog();
@@ -523,10 +543,10 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                     if (response.body() != null) {
                         try {
                             JSONObject jsonObject = new JSONObject(response.body().string());
-                            if (jsonObject.optString("status").equalsIgnoreCase("Success")){
+                            if (jsonObject.optString("status").equalsIgnoreCase("Success")) {
                                 dialog.dismiss();
                                 getDeliveryNewOrders();
-                            }else{
+                            } else {
                                 Toast.makeText(dashBoardActivity, "Please enter valid otp", Toast.LENGTH_SHORT).show();
 
                             }
@@ -562,7 +582,7 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
         RequestBody comment = RequestBody.create(MediaType.parse("text/plain"), "complete");
 
         Utils.showProgressDialog(dashBoardActivity);
-        RestClient.update_order(orderID, status,otpBody,comment, new Callback<ResponseBody>() {
+        RestClient.update_order(orderID, status, otpBody, comment, new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Utils.dismissProgressDialog();
@@ -570,10 +590,10 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
                     if (response.body() != null) {
                         try {
                             JSONObject jsonObject = new JSONObject(response.body().string());
-                            if (jsonObject.optString("status").equalsIgnoreCase("Success")){
+                            if (jsonObject.optString("status").equalsIgnoreCase("Success")) {
                                 dialog.dismiss();
                                 getDeliveryOngoingOrders();
-                            }else{
+                            } else {
                                 Toast.makeText(dashBoardActivity, "Please enter valid otp", Toast.LENGTH_SHORT).show();
 
                             }
@@ -598,5 +618,30 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
             }
         });
     }
+
+
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            Toast.makeText(dashBoardActivity, "New Order received", Toast.LENGTH_SHORT).show();
+
+          if (mBinding.cView.getVisibility()==View.VISIBLE){
+              if (!TextUtils.isEmpty(ChotuBoyPrefs.getString(getActivity(), "outletData"))) {
+                  getConfirmedOrders();
+              } else {
+                  getDeliveryOngoingOrders();
+              }
+          }else{
+              if (!TextUtils.isEmpty(ChotuBoyPrefs.getString(getActivity(), "outletData"))) {
+                  getPendingOrders();
+              } else {
+                  getDeliveryNewOrders();
+              }
+          }
+
+
+        }
+    };
 
 }
