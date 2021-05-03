@@ -5,9 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.provider.Settings;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -16,42 +16,45 @@ import androidx.core.content.ContextCompat;
 
 import com.chotupartner.R;
 import com.chotupartner.activity.SplashActivity;
+import com.chotupartner.utils.ChotuBoyPrefs;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.io.IOException;
 
 public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
     private static final String TAG = MyFirebaseServiceMessaging.class.getName();
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        JSONObject jsonObject = new JSONObject();
+
+        MediaPlayer media = MediaPlayer.create(this, R.raw.ordermp3);
+        try {
+            media.prepare();
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        media.start();
 
         Intent filter = new Intent("custom.notification.navigation");
         sendBroadcast(filter);
 
         if (remoteMessage.getData().size() > 0) {
-            try {
-                jsonObject.put("message", remoteMessage.getData().get("message"));
-                Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            sendNotification(remoteMessage.getData().get("message"));
 
-
-                sendNotification(jsonObject,"type", "New Order received");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
 
         }
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    private void sendNotification(JSONObject jsonObject, String type, String tittle) {
-        String messageBody = jsonObject.toString();
+    private void sendNotification(String message) {
 
         // NotificationPushData data = BaseUtil.objectFromString(messageBody, NotificationPushData.class);
 
@@ -64,7 +67,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "PUSH");
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-        inboxStyle.addLine(messageBody);
+        inboxStyle.addLine(message);
 
         long when = System.currentTimeMillis();         // notification time
 
@@ -79,13 +82,13 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
         Notification notification;
         notification = mBuilder.setSmallIcon(R.mipmap.ic_launcher).setTicker(getString(R.string.app_name)).setWhen(when)
 //                .setAutoCancel(true)
-                .setContentTitle(getString(R.string.app_name))
+                .setContentTitle("Order Update")
                 .setContentIntent(pendingIntent)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(tittle))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setWhen(when)
                 .setSmallIcon(getNotificationIcon(mBuilder))
-                .setContentText(messageBody)
+                .setContentText(message)
                 .setChannelId(CHANNEL_ID)
                 .setDefaults(Notification.DEFAULT_VIBRATE
                         | Notification.DEFAULT_LIGHTS
@@ -118,7 +121,7 @@ public class MyFirebaseServiceMessaging extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String s) {
         super.onNewToken(s);
-        Log.d("token", ""+s);
+        ChotuBoyPrefs.putString(this, "fcm", s);
     }
 }
 

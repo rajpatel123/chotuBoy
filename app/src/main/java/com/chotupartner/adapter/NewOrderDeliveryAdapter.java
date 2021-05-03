@@ -137,8 +137,8 @@ public class NewOrderDeliveryAdapter extends RecyclerView.Adapter<NewOrderDelive
         String date = "" + cl.get(Calendar.DAY_OF_MONTH) + "-" + cl.get(Calendar.MONTH) + "-" + cl.get(Calendar.YEAR);
         String time = "" + cl.get(Calendar.HOUR_OF_DAY) + ":" + cl.get(Calendar.MINUTE) + ":" + cl.get(Calendar.SECOND);
 
-        holder.tvOrderPlaced.setText("ORDER Placed on :" + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
-        holder.deliveryTime.setText("Delivery Date :" + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
+        holder.tvOrderPlaced.setText("ORDER Placed on :  " + Utils.orderPlaced(moviesList.get(position).getDateAdded()));
+        holder.deliveryTime.setText("Delivery Date :   " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
 
 //        holder.DeliveryDate.setText("Scheduled for " + date + " " + time);
 

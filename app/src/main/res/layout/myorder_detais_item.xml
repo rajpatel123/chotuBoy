@@ -44,6 +44,8 @@
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:text=""
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
                     android:textSize="14dp" />
 
             </RelativeLayout>
@@ -64,14 +66,14 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tvOrderDate"
                     android:text=""
-                    android:textSize="14dp"></TextView>
+                    android:textColor="@color/black"
+                    android:textSize="14dp"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rlDiscount"
                 android:layout_width="fill_parent"
-
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -101,6 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:textColor="@color/black"
                     android:textSize="14dp" />
 
             </RelativeLayout>

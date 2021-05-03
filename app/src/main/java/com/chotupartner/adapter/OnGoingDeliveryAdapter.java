@@ -117,9 +117,8 @@ public class OnGoingDeliveryAdapter extends RecyclerView.Adapter<OnGoingDelivery
             holder.llImage.setVisibility(View.GONE);
         }
 
-        holder.deliveryDate.setText("Placed on " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook()) * 1000));
-        holder.deliveryTime.setText("Delivery Date " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook()) * 1000));
-
+        holder.tvOrderPlaced.setText("ORDER Placed on :  " + Utils.orderPlaced(moviesList.get(position).getDateAdded()));
+        holder.deliveryTime.setText("Delivery Date :   " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
 
         holder.deliveryPeronName.setText("Rs " + moviesList.get(position).getDelivery_name());
         holder.deliveryPersonNumber.setText("Rs " + moviesList.get(position).getContact_no());
@@ -131,7 +130,6 @@ public class OnGoingDeliveryAdapter extends RecyclerView.Adapter<OnGoingDelivery
         String date = "" + cl.get(Calendar.DAY_OF_MONTH) + "-" + cl.get(Calendar.MONTH) + "-" + cl.get(Calendar.YEAR);
         String time = "" + cl.get(Calendar.HOUR_OF_DAY) + ":" + cl.get(Calendar.MINUTE) + ":" + cl.get(Calendar.SECOND);
 
-        holder.deliveryDate.setText("Placed on " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook()) * 1000));
         if (!TextUtils.isEmpty(moviesList.get(position).getDelivery_name())) {
             holder.deliveryPeronName.setText("" + moviesList.get(position).getDelivery_name());
             holder.deliveryPersonNumber.setText("" + moviesList.get(position).getContact_no());
@@ -188,7 +186,7 @@ public class OnGoingDeliveryAdapter extends RecyclerView.Adapter<OnGoingDelivery
         public View iv1Line, iv2Line, iv3Line;
 
         RelativeLayout rl;
-        TextView deliveryDate, addressTv,tvOrderPlaced, deliveryTime, contactType, tvPrice, deliveryPeronName, acceptTV, deliverTv, deliveryCode, deliveryPersonNumber, tvOrderID1, tvDeliveryChar, totalPaidAmount, paymentMode;
+        TextView  addressTv,tvOrderPlaced, deliveryTime, contactType, tvPrice, deliveryPeronName, acceptTV, deliverTv, deliveryCode, deliveryPersonNumber, tvOrderID1, tvDeliveryChar, totalPaidAmount, paymentMode;
         LinearLayout llImage, llOutLetText, llTop;
         Button btnViewDetails;
 
@@ -197,7 +195,7 @@ public class OnGoingDeliveryAdapter extends RecyclerView.Adapter<OnGoingDelivery
 
 
             deliveryCode = itemView.findViewById(R.id.deliveryCode);
-            deliveryDate = itemView.findViewById(R.id.tvOrderPlaced);
+            tvOrderPlaced = itemView.findViewById(R.id.tvOrderPlaced);
             contactType = itemView.findViewById(R.id.contactType);
             deliveryTime = itemView.findViewById(R.id.deliveryTime);
             deliveryPeronName = itemView.findViewById(R.id.deliveryPeronName);

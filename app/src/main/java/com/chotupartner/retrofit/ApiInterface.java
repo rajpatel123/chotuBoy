@@ -30,12 +30,25 @@ public interface ApiInterface {
                                            @Part("user_type") RequestBody user_type
     );
 
+    @Multipart
+    @POST("ApiData/updateFcmtokenInOutlet")
+    Call<ResponseBody> updateFCMOutlet(@Part("outlet_id") RequestBody phone,
+                                           @Part("fcm_token") RequestBody otp
+    );
+
 
     @Multipart
     @POST("ApiData/VerifyOtp")
     Call<DeliveryPartnerResponse> verifyOtpDelivery(@Part("phone") RequestBody phone,
                                                     @Part("otp") RequestBody otp,
                                                     @Part("user_type") RequestBody user_type
+    );
+
+
+    @Multipart
+    @POST("ApiData/updateFcmtokenInDelivery")
+    Call<ResponseBody> updateFCMDelivery(@Part("delivery_id") RequestBody phone,
+                                                    @Part("fcm_token") RequestBody otp
     );
 
 

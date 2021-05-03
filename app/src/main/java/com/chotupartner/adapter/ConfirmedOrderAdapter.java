@@ -124,8 +124,8 @@ public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAd
 
         }
 
-        holder.tvOrderPlaced.setText(" ORDER PLACED ON : "+DateFormats.reverseDate(moviesList.get(position).getDateAdded().split(" ")[0])
-                +" "+DateFormats.formatTime(moviesList.get(position).getDateAdded().split(" ")[1]));
+        holder.tvOrderPlaced.setText("ORDER Placed on :  " + Utils.orderPlaced(moviesList.get(position).getDateAdded()));
+        holder.deliveryTime.setText("Delivery Date :   " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
 
         if (!TextUtils.isEmpty(moviesList.get(position).getDelivery_name())) {
             holder.deliveryPeronName.setText("" + moviesList.get(position).getDelivery_name());

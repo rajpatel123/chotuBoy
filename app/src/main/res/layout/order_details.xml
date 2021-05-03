@@ -390,6 +390,8 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentRight="true"
                                             android:text=""
+
+                                            android:textColor="@color/black"
                                             android:textSize="14dp"></TextView>
 
                                     </RelativeLayout>
@@ -404,7 +406,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Products Discount  "
-                                            android:textColor="@color/bottom_gray"
+                                            android:textColor="@color/black"
                                             android:textSize="12dp"></TextView>
 
                                         <TextView
@@ -413,7 +415,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentRight="true"
                                             android:text=""
-                                            android:textColor="@color/bottom_gray"
+                                            android:textColor="@color/black"
                                             android:textSize="12dp"></TextView>
 
                                     </RelativeLayout>
@@ -431,7 +433,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Delivery Charges  "
-                                            android:textColor="@color/bottom_gray"
+                                            android:textColor="@color/black"
                                             android:textSize="12dp"></TextView>
 
                                         <TextView
@@ -440,7 +442,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentRight="true"
                                             android:text="FREE"
-                                            android:textColor="@color/bottom_gray"
+                                            android:textColor="@color/black"
                                             android:textSize="12dp"></TextView>
 
                                     </RelativeLayout>
@@ -458,7 +460,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="Final paid amount  "
-                                            android:textColor="@color/bottom_gray"
+                                            android:textColor="@color/black"
                                             android:textSize="12dp" />
 
                                         <TextView
@@ -467,7 +469,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentRight="true"
                                             android:text=""
-                                            android:textColor="@color/bottom_gray"
+                                            android:textColor="@color/black"
                                             android:textSize="12dp" />
 
                                     </RelativeLayout>
@@ -532,7 +534,7 @@
                         android:layout_height="wrap_content"
                         android:background="#F5F2F2"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <TextView
 
@@ -544,14 +546,14 @@
                             android:gravity="center"
 
                             android:text="Delivery Address "
-                            android:textColor="@color/red"
+                            android:textColor="@color/colorPrimary"
                             android:textSize="14dp"></TextView>
 
                         <TextView
                             android:id="@+id/tvCustName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="50dp"
+                            android:layout_marginLeft="45dp"
                             android:text="Name "
                             android:textColor="@color/black"
                             android:textSize="14dp" />
@@ -560,7 +562,7 @@
                             android:id="@+id/tvCustMobile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="50dp"
+                            android:layout_marginLeft="45dp"
                             android:text="Name "
                             android:textColor="@color/black"
                             android:textSize="14dp" />
@@ -569,7 +571,7 @@
                             android:id="@+id/tvAddress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="50dp"
+                            android:layout_marginLeft="45dp"
                             android:layout_marginTop="3dp"
                             android:layout_marginBottom="10dp"
                             android:text="Name "

@@ -114,7 +114,8 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             holder.llImage.setVisibility(View.GONE);
         }
 
-        holder.tvOrderPlaced.setText("ORDER Placed on :" + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
+        holder.tvOrderPlaced.setText("ORDER Placed on :  " + Utils.orderPlaced(moviesList.get(position).getDateAdded()));
+        holder.deliveryTime.setText("Delivery Date :   " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
 
         holder.totalPaidAmount.setText("Rs " + total);
         if (!TextUtils.isEmpty(moviesList.get(position).getDelivery_name())) {

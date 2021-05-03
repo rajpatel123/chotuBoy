@@ -36,6 +36,15 @@ public class RestClient {
   }
 
 
+  public static void updateFCMDelivery(RequestBody deliveryid,RequestBody fcm, Callback<ResponseBody> callback) {
+    RetrofitClient.getClient().updateFCMDelivery(deliveryid,fcm).enqueue(callback);
+  }
+
+  public static void updateFCMOutlet(RequestBody outlet_id,RequestBody fcm, Callback<ResponseBody> callback) {
+    RetrofitClient.getClient().updateFCMOutlet(outlet_id,fcm).enqueue(callback);
+  }
+
+
   public static void getConfirmedOrders(RequestBody outlet_id, Callback<OrderListResponse> callback) {
     RetrofitClient.getClient().getConfirmedOrders(outlet_id).enqueue(callback);
   }

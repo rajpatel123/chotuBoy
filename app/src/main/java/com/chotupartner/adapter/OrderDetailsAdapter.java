@@ -1,6 +1,7 @@
 package com.chotupartner.adapter;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class    OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder> {
+public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder> {
 
     private List<OrderProduct> moviesList;
     private LayoutInflater mInflater;
@@ -49,16 +50,14 @@ public class    OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAda
     // binds the data to the TextView in each cell
     @Override
     public void onBindViewHolder(@NonNull OrderDetailsAdapter.ViewHolder holder, final int position) {
-
-
-        //  Picasso.get().load(moviesList.get(position).getProductImg()).into(holder.ivItem);
-
        if (moviesList.get(position).getDiscount().equalsIgnoreCase("0")) {
            holder.tvOrdderNuber.setVisibility(View.GONE);
            holder.rlDiscount.setVisibility(View.GONE);
        }else {
            int discountPrice = (int) Float.parseFloat(moviesList.get(position).getRegularPrice());
            holder.tvOrdderNuber.setText("Rs " + discountPrice);
+           holder.tvOrderDate1.setPaintFlags(holder.tvOrderDate1.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
            holder.rlDiscount.setVisibility(View.VISIBLE);
        }
 
@@ -66,9 +65,8 @@ public class    OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAda
 
 
         holder.tvOrdderName1.setText(moviesList.get(position).getProductTitle());
-
         holder.tvOrderDate1.setText("Rs " + moviesList.get(position).getPrice());
-        holder.qtyNumber.setText(" " + moviesList.get(position).getQuantity());
+        holder.qtyNumber.setText("Items " + moviesList.get(position).getQuantity());
 
         Picasso.get().load(moviesList.get(position).getImage()).into(holder.ivImage);
     }
@@ -91,10 +89,8 @@ public class    OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAda
         ViewHolder(View itemView) {
             super(itemView);
 
-
             tvOrdderNuber = itemView.findViewById(R.id.tvOrdderNuber);
             tvOrdderName1 = itemView.findViewById(R.id.tvOrdderName1);
-
             qtyNumber = itemView.findViewById(R.id.qtyNumber);
             tvOrderDate1 = itemView.findViewById(R.id.tvOrderDate1);
             DeliveryDate1 = itemView.findViewById(R.id.DeliveryDate1);

@@ -78,8 +78,6 @@ public class Utils {
     }
 
 
-
-
     public static String startTimeFormat(long timeStamp) {
 
 
@@ -140,7 +138,7 @@ public class Utils {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
         String strTime = mdformat.format(calendar.getTime());
-       return strTime;
+        return strTime;
     }
 
     public static String getCurrentDate() {
@@ -152,8 +150,6 @@ public class Utils {
     }
 
 
-
-
     public static String dateFormat(long timeStamp) {
 
 
@@ -161,21 +157,33 @@ public class Utils {
             return null;
         }
 
-        Log.d("date", ""+timeStamp);
+        Log.d("date", "" + timeStamp);
         SimpleDateFormat tripDateFormat = new SimpleDateFormat("dd MMM YYYY");
         Date dNow = new Date(timeStamp);
         return tripDateFormat.format(dNow);
+    }
+
+    public static String orderPlaced(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat tripDateFormat = new SimpleDateFormat("dd MMM YYYY hh:mm");
+
+        try {
+            return tripDateFormat.format(dateFormat.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+return "";
     }
 
     public static long getMillies(String testDate) {
 
         Calendar calendar = Calendar.getInstance();
         String dates[] = testDate.split("/");
-        int dt= Integer.parseInt(dates[0]);
-        int mm= Integer.parseInt(dates[1]);
-        int yy= Integer.parseInt(dates[2]);
+        int dt = Integer.parseInt(dates[0]);
+        int mm = Integer.parseInt(dates[1]);
+        int yy = Integer.parseInt(dates[2]);
 
-        calendar.set(yy,mm-1,dt);
+        calendar.set(yy, mm - 1, dt);
 
         try {
             Date date = calendar.getTime();
@@ -190,11 +198,11 @@ public class Utils {
 
         Calendar calendar = Calendar.getInstance();
         String dates[] = testDate.split(":");
-        int hh= Integer.parseInt(dates[0]);
-        int mm= Integer.parseInt(dates[1]);
-        int ss= Integer.parseInt(dates[2]);
+        int hh = Integer.parseInt(dates[0]);
+        int mm = Integer.parseInt(dates[1]);
+        int ss = Integer.parseInt(dates[2]);
 
-        calendar.set(hh,mm,ss);
+        calendar.set(hh, mm, ss);
 
         try {
             Date date = calendar.getTime();

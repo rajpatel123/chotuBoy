@@ -35,6 +35,9 @@ import com.chotupartner.modelClass.orderlist.OrderListResponse;
 import com.chotupartner.retrofit.RestClient;
 import com.chotupartner.utils.ChotuBoyPrefs;
 import com.chotupartner.utils.Utils;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -104,10 +107,21 @@ public class HomeFragment extends Fragment implements MyOrderAdapter.ItemClickLi
         });
 
 
+//        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+//            @Override
+//            public void onSuccess(InstanceIdResult instanceIdResult) {
+//                String token = instanceIdResult.getToken();
+//                ChotuBoyPrefs.putString(getActivity(), "fcm",token);
+//                Log.d("FCM",""+token);
+//            }
+//        });
+
         return view;
 
 
     }
+
+
 
 
     @Override

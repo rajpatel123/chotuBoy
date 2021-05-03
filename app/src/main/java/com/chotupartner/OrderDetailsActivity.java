@@ -38,7 +38,7 @@ public class OrderDetailsActivity extends AppCompatActivity {
 
     OrderDetailsBinding mBinding;
     int orderID;
-String selectedOrderStatus;
+    String selectedOrderStatus;
     private String comments;
 
     @Override
@@ -153,8 +153,8 @@ String selectedOrderStatus;
                                 mBinding.recyclerCartView.setLayoutManager(horizontalLayoutManagaer);
                                 mBinding.recyclerCartView.setAdapter(horizontalAdapter);
 
-                                mBinding.tvCustName.setText(getorderdetailbyidResp.getOrderInfo().getOrderInfo().getFirstname() + " " + getorderdetailbyidResp.getOrderInfo().getOrderInfo().getLastname());
-                                mBinding.tvCustMobile.setText(getorderdetailbyidResp.getOrderInfo().getOrderInfo().getPhone());
+                                mBinding.tvCustName.setText("Name: "+getorderdetailbyidResp.getOrderInfo().getOrderInfo().getFirstname() + " " + getorderdetailbyidResp.getOrderInfo().getOrderInfo().getLastname());
+                                mBinding.tvCustMobile.setText("Phone: "+getorderdetailbyidResp.getOrderInfo().getOrderInfo().getPhone());
                                 mBinding.tvPaidOnline.setText("Payment Status " + getorderdetailbyidResp.getOrderInfo().getOrderInfo().getPaymentType());
                                 mBinding.outLetName.setText("Delivery By " + getorderdetailbyidResp.getOrderInfo().getOrderInfo().getPaymentType());
 
@@ -170,7 +170,7 @@ String selectedOrderStatus;
 //                                String time = "" + cl.get(Calendar.HOUR_OF_DAY) + ":" + cl.get(Calendar.MINUTE) + ":" + cl.get(Calendar.SECOND);
 
 
-                                mBinding.Time.setText("Placed on " + Utils.startTimeFormat(Long.parseLong(getorderdetailbyidResp.getOrderInfo().getOrderInfo().getSlotBook())*1000));
+                                mBinding.Time.setText("Placed on " + Utils.orderPlaced(getorderdetailbyidResp.getOrderInfo().getOrderInfo().getDateAdded()));
                                 mBinding.tvAddress.setText(getorderdetailbyidResp.getOrderInfo().getOrderInfo().getAddress());
 
                                 mBinding.lltop.setVisibility(View.VISIBLE);
