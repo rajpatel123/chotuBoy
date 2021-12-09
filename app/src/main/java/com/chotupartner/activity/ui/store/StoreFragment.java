@@ -298,9 +298,14 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
             sellmrp.setText("" + (!TextUtils.isEmpty(productOnOutlet.getDiscountPrice()) ? productOnOutlet.getDiscountPrice() : "0"));
         } else {
             mrp.setText("" + productOnOutlet.getMrp());
-            sellmrp.setText("" + productOnOutlet.getDiscountPrice());
-        }
+            if (!TextUtils.isEmpty(productOnOutlet.getDiscount()) && Integer.parseInt(productOnOutlet.getDiscount())>0 ){
+                sellmrp.setText("" + (int) Math.round((Float.parseFloat(productOnOutlet.getMrp())) - (Float.parseFloat(productOnOutlet.getMrp()) * Float.parseFloat(productOnOutlet.getDiscount()) / 100)));
+            }else{
+                sellmrp.setText("" +productOnOutlet.getMrp());
+            }
 
+        }
+        discount.setText("" + productOnOutlet.getDiscount());
         sellmrp.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -316,14 +321,13 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
             @Override
             public void afterTextChanged(Editable s) {
                 if (!TextUtils.isEmpty(s.toString())) {
-
                     discount.setText("" + getDiscount(mrp.getText().toString(), s.toString()));
                 }
 
             }
         });
 
-        discount.setText("" + getDiscount(mrp.getText().toString(), sellmrp.getText().toString()));
+
         ImageView crossBtn = view.findViewById(R.id.closeDialog);
         builder.setCancelable(false);
         builder.setView(view);
@@ -350,7 +354,6 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
             }
         });
 
-
         dialog = builder.create();
         dialog.show();
     }
@@ -358,7 +361,7 @@ public class StoreFragment extends Fragment implements ProductAdapter.ItemClickL
     private int getDiscount(String mrp, String sellingprice) {
         if (!TextUtils.isEmpty(mrp) && !mrp.equalsIgnoreCase("0") && !TextUtils.isEmpty(sellingprice) && !sellingprice.equalsIgnoreCase("0")) {
             if (Integer.parseInt(mrp) >= Integer.parseInt(sellingprice)) {
-                return ((Integer.parseInt(mrp) - Integer.parseInt(sellingprice)) * 100) / Integer.parseInt(mrp);
+                return  (int)Math.round(((Float.parseFloat(mrp) - Float.parseFloat(sellingprice)) * 100) / Float.parseFloat(mrp));
 
             } else {
                 Toast.makeText(getActivity(), "Selling price should be less than MRP", Toast.LENGTH_LONG).show();

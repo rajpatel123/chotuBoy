@@ -58,8 +58,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:text="MRP: " />
+                    android:text="MRP: "
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/mrp"
@@ -75,9 +75,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15dp"
-                    android:textStyle="bold"
-
-                    android:text="Selling Price: " />
+                    android:text="Sale Price: "
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/finalPrice"
@@ -86,16 +85,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10dp"
                     android:text="Rs 65"
-android:textColor="@color/green"
+                    android:textColor="@color/green"
                     android:textSize="@dimen/twenty_16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15dp"
-                    android:textStyle="bold"
-
-                    android:text="Discount: " />
+                    android:text="Discount: "
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/discount"

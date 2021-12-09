@@ -46,7 +46,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public ProductAdapter(Context cartListActivity, List<ProductOnOutlet> productOnOutlet, ItemClickListener itemClickListener) {
         this.cartListActivity = cartListActivity;
         this.itemClickListener = itemClickListener;
-        this.productOnOutletFilter=productOnOutlet;
+        this.productOnOutletFilter = productOnOutlet;
     }
 
     // inflates the cell layout from xml when needed
@@ -65,80 +65,81 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, final int position) {
 
-
-        //  Picasso.get().load(moviesList.get(position).getProductImg()).into(holder.ivItem);
-
-       // holder.deliverBy.setText("Deliver By "+moviesList.get(position).getOutlet().getOutletName());
-
-
-
         holder.productName.setText("" + productOnOutletFilter.get(position).getProductName());
-        if (TextUtils.isEmpty(productOnOutletFilter.get(position).getMrp())){
-            holder.mrp.setText("Rs " + productOnOutletFilter.get(position).getPrice());
-            holder.finalPrice.setText("Rs " + (!TextUtils.isEmpty(productOnOutletFilter.get(position).getDiscountPrice())?productOnOutletFilter.get(position).getDiscountPrice():"0"));
-            holder.discount.setText(""+0);
-            holder.checkbox.setVisibility(View.GONE);
-            holder.checkbox.setImageResource(R.drawable.ic_check_normal);
-        }else{
-            holder.mrp.setText("Rs " + productOnOutletFilter.get(position).getMrp());
-            holder.finalPrice.setText("Rs " + productOnOutletFilter.get(position).getDiscountPrice());
-            holder.discount.setText(""+productOnOutletFilter.get(position).getDiscount());
-            holder.checkbox.setImageResource(R.drawable.ic_check_selected);
-            holder.checkbox.setVisibility(View.VISIBLE);
-        }
+//        if (TextUtils.isEmpty(productOnOutletFilter.get(position).getMrp())){
+//            holder.mrp.setText("Rs " + productOnOutletFilter.get(position).getPrice());
+//            holder.finalPrice.setText("Rs " + (!TextUtils.isEmpty(productOnOutletFilter.get(position).getDiscountPrice())?productOnOutletFilter.get(position).getDiscountPrice():"0"));
+//            holder.discount.setText(""+0);
+//            holder.checkbox.setVisibility(View.GONE);
+//            holder.checkbox.setImageResource(R.drawable.ic_check_normal);
+//        }else{
+        holder.mrp.setText("Rs " + productOnOutletFilter.get(position).getMrp());
+        if (!TextUtils.isEmpty(productOnOutletFilter.get(position).getDiscount())
+                && Integer.parseInt(productOnOutletFilter.get(position).getDiscount()) > 0) {
 
-        if (!TextUtils.isEmpty(productOnOutletFilter.get(position).getProductImages()) && productOnOutletFilter.get(position).getProductImages().length()>5){
+            float x = Float.parseFloat(productOnOutletFilter.get(position).getMrp());
+            float y = (x * Float.parseFloat(productOnOutletFilter.get(position).getDiscount()))/100;
+
+            holder.finalPrice.setText("Rs." + (int)Math.round(x-y));
+        }else{
+            holder.finalPrice.setText("Rs." +productOnOutletFilter.get(position).getMrp());
+
+        }
+        holder.discount.setText("" + productOnOutletFilter.get(position).getDiscount() + "%");
+        holder.checkbox.setImageResource(R.drawable.ic_check_selected);
+        holder.checkbox.setVisibility(View.VISIBLE);
+        //  }
+
+        if (!TextUtils.isEmpty(productOnOutletFilter.get(position).getProductImages()) && productOnOutletFilter.get(position).getProductImages().length() > 5) {
 
             JSONArray jsonArray = null;
             try {
                 jsonArray = new JSONArray(productOnOutletFilter.get(position).getProductImages());
-                String imagePath = BuildConfig.API_SERVER_IP+"assets/uploads/product/"+jsonArray.get(0);
-                Log.d("Path", ""+imagePath);
+                String imagePath = BuildConfig.API_SERVER_IP + "assets/uploads/product/" + jsonArray.get(0);
+                Log.d("Path", "" + imagePath);
                 Glide.with(context)
-                    .load(imagePath)
-                    .addListener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            return false;
-                        }
+                        .load(imagePath)
+                        .addListener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                return false;
+                            }
 
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            return false;
-                        }
-                    }).diskCacheStrategy(DiskCacheStrategy.ALL).skipMemoryCache(true)
-                    .error(R.drawable.place_holder_img)
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                return false;
+                            }
+                        }).diskCacheStrategy(DiskCacheStrategy.ALL).skipMemoryCache(true)
+                        .error(R.drawable.place_holder_img)
 
-                    .fitCenter() // scale to fit entire image within ImageView
-                    .into(holder.productImage);
+                        .fitCenter() // scale to fit entire image within ImageView
+                        .into(holder.productImage);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-        }else{
+        } else {
             holder.productImage.setImageResource(R.drawable.place_holder_img);
 
         }
 
 
-
-
         holder.checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 if (!TextUtils.isEmpty(productOnOutletFilter.get(position).getAvailability()) && productOnOutletFilter.get(position).getAvailability().equalsIgnoreCase("1")){
-                     itemClickListener.updateAvailable(productOnOutletFilter.get(position),"0", position);
-                 }else{
-                     itemClickListener.updateAvailable(productOnOutletFilter.get(position),"1", position);
-                 }
+                if (!TextUtils.isEmpty(productOnOutletFilter.get(position).getAvailability()) && productOnOutletFilter.get(position).getAvailability().equalsIgnoreCase("1")) {
+                    itemClickListener.updateAvailable(productOnOutletFilter.get(position), "0", position);
+                } else {
+                    itemClickListener.updateAvailable(productOnOutletFilter.get(position), "1", position);
+                }
             }
         });
 
         holder.editproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemClickListener.onEdit(productOnOutletFilter.get(position),position);
+                itemClickListener.onEdit(productOnOutletFilter.get(position), position);
 
 
             }
@@ -152,7 +153,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public void setData(ArrayList<ProductOnOutlet> temp) {
-        this.productOnOutletFilter= temp;
+        this.productOnOutletFilter = temp;
         notifyDataSetChanged();
     }
 
@@ -160,9 +161,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView productImage,checkbox,editproduct;
+        public ImageView productImage, checkbox, editproduct;
 
-        TextView  mrp,productName, discount,finalPrice;
+        TextView mrp, productName, discount, finalPrice;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -187,6 +188,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void updateAvailable(ProductOnOutlet productOnOutlet, String available, int position);
-        void onEdit(ProductOnOutlet productOnOutlet,int position);
+
+        void onEdit(ProductOnOutlet productOnOutlet, int position);
     }
 }

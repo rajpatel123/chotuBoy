@@ -39,6 +39,27 @@ public class CustomerInfo {
     @SerializedName("verify_number")
     @Expose
     private String verifyNumber;
+    @SerializedName("referred_id")
+    @Expose
+    private String referredId;
+    @SerializedName("wallet_balence")
+    @Expose
+    private Object walletBalence;
+    @SerializedName("wallet_deduct")
+    @Expose
+    private String walletDeduct;
+    @SerializedName("wallet_status")
+    @Expose
+    private String walletStatus;
+    @SerializedName("login_status")
+    @Expose
+    private Object loginStatus;
+    @SerializedName("partner")
+    @Expose
+    private String partner;
+    @SerializedName("partner_comm")
+    @Expose
+    private String partnerComm;
     @SerializedName("activation_status")
     @Expose
     private String activationStatus;
@@ -147,6 +168,62 @@ public class CustomerInfo {
 
     public void setVerifyNumber(String verifyNumber) {
         this.verifyNumber = verifyNumber;
+    }
+
+    public String getReferredId() {
+        return referredId;
+    }
+
+    public void setReferredId(String referredId) {
+        this.referredId = referredId;
+    }
+
+    public Object getWalletBalence() {
+        return walletBalence;
+    }
+
+    public void setWalletBalence(Object walletBalence) {
+        this.walletBalence = walletBalence;
+    }
+
+    public String getWalletDeduct() {
+        return walletDeduct;
+    }
+
+    public void setWalletDeduct(String walletDeduct) {
+        this.walletDeduct = walletDeduct;
+    }
+
+    public String getWalletStatus() {
+        return walletStatus;
+    }
+
+    public void setWalletStatus(String walletStatus) {
+        this.walletStatus = walletStatus;
+    }
+
+    public Object getLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(Object loginStatus) {
+        this.loginStatus = loginStatus;
+    }
+
+    public String getPartner() {
+        return partner;
+    }
+
+    public void setPartner(String partner) {
+        this.partner = partner;
+    }
+
+    public String getPartnerComm() {
+        return partnerComm;
+    }
+
+    public void setPartnerComm(String partnerComm) {
+        this.partnerComm = partnerComm;
     }
 
     public String getActivationStatus() {

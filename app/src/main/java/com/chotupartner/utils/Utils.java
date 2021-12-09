@@ -78,23 +78,7 @@ public class Utils {
     }
 
 
-    public static String startTimeFormat(long timeStamp) {
 
-
-        if (timeStamp <= 0) {
-            return null;
-        }
-
-        try {
-            Log.d("date", "" + timeStamp);
-            SimpleDateFormat tripDateFormat = new SimpleDateFormat("dd MMM yyyy   hh:mm a");
-            Date dNow = new Date(timeStamp);
-            return tripDateFormat.format(dNow);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
 
     public static void displayToast(Context applicationContext, String s) {
         Toast.makeText(applicationContext, s, Toast.LENGTH_LONG).show();
@@ -173,6 +157,24 @@ public class Utils {
             e.printStackTrace();
         }
 return "";
+    }
+
+    public static String startTimeFormat(long timeStamp) {
+
+
+        if (timeStamp <= 0) {
+            return null;
+        }
+
+        try {
+            Log.d("date", "" + timeStamp);
+            SimpleDateFormat tripDateFormat = new SimpleDateFormat("dd MMM yyyy   hh:mm a");
+            Date dNow = new Date(timeStamp);
+            return tripDateFormat.format(dNow);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public static long getMillies(String testDate) {

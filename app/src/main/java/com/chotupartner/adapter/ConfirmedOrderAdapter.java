@@ -74,7 +74,13 @@ public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAd
         holder.tvOrderID1.setText(""+moviesList.get(position).getOrderCustomerId());
         holder.deliveryPeronName.setText("" + moviesList.get(position).getDelivery_name());
         holder.deliveryPersonNumber.setText(" " + moviesList.get(position).getContact_no());
+        if (moviesList.get(position).getPaymentType().equalsIgnoreCase("ROZERPAY")){
+            holder.paymentMode.setText("Online");
 
+        }else{
+            holder.paymentMode.setText("CASH");
+
+        }
 
         holder.callImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +145,6 @@ public class ConfirmedOrderAdapter extends RecyclerView.Adapter<ConfirmedOrderAd
         }
 
 
-        holder.deliveryTime.setText(" Delivery Date Time : "+DateFormats.homeDateFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
         holder.totalPaidAmount.setText("Rs " + total);
 
 

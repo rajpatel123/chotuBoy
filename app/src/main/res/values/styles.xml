@@ -220,7 +220,7 @@
 
 
     <color name="hint_edittext_color">@color/colorPrimary</color>
-    <dimen name="twenty_16sp">16sp</dimen>
+    <dimen name="twenty_16sp">12sp</dimen>
 
 
 

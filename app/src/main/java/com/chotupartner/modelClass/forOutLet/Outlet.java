@@ -17,6 +17,9 @@ public class Outlet {
     @SerializedName("phone")
     @Expose
     private String phone;
+    @SerializedName("email")
+    @Expose
+    private String email;
     @SerializedName("address")
     @Expose
     private String address;
@@ -41,6 +44,12 @@ public class Outlet {
     @SerializedName("outlet_image")
     @Expose
     private String outletImage;
+    @SerializedName("service_id")
+    @Expose
+    private String serviceId;
+    @SerializedName("service_area_id")
+    @Expose
+    private Object serviceAreaId;
     @SerializedName("publication_status")
     @Expose
     private String publicationStatus;
@@ -49,16 +58,19 @@ public class Outlet {
     private String deletionStatus;
     @SerializedName("verify_number")
     @Expose
-    private Object verifyNumber;
+    private String verifyNumber;
     @SerializedName("date_added")
     @Expose
     private String dateAdded;
     @SerializedName("last_updated")
     @Expose
-    private Object lastUpdated;
+    private String lastUpdated;
+    @SerializedName("fcm_token")
+    @Expose
+    private String fcmToken;
     @SerializedName("lastlogin")
     @Expose
-    private Object lastlogin;
+    private String lastlogin;
 
     public String getOutletId() {
         return outletId;
@@ -90,6 +102,14 @@ public class Outlet {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -156,6 +176,22 @@ public class Outlet {
         this.outletImage = outletImage;
     }
 
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    public Object getServiceAreaId() {
+        return serviceAreaId;
+    }
+
+    public void setServiceAreaId(Object serviceAreaId) {
+        this.serviceAreaId = serviceAreaId;
+    }
+
     public String getPublicationStatus() {
         return publicationStatus;
     }
@@ -172,11 +208,11 @@ public class Outlet {
         this.deletionStatus = deletionStatus;
     }
 
-    public Object getVerifyNumber() {
+    public String getVerifyNumber() {
         return verifyNumber;
     }
 
-    public void setVerifyNumber(Object verifyNumber) {
+    public void setVerifyNumber(String verifyNumber) {
         this.verifyNumber = verifyNumber;
     }
 
@@ -188,19 +224,27 @@ public class Outlet {
         this.dateAdded = dateAdded;
     }
 
-    public Object getLastUpdated() {
+    public String getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(Object lastUpdated) {
+    public void setLastUpdated(String lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 
-    public Object getLastlogin() {
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+    }
+
+    public String getLastlogin() {
         return lastlogin;
     }
 
-    public void setLastlogin(Object lastlogin) {
+    public void setLastlogin(String lastlogin) {
         this.lastlogin = lastlogin;
     }
 

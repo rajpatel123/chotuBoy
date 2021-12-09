@@ -23,7 +23,7 @@ public class OrderInfo_ {
     private String outletId;
     @SerializedName("delivery_id")
     @Expose
-    private Object deliveryId;
+    private String deliveryId;
     @SerializedName("razorpay_order_id")
     @Expose
     private Object razorpayOrderId;
@@ -62,7 +62,7 @@ public class OrderInfo_ {
     private String city;
     @SerializedName("postcode")
     @Expose
-    private String postcode;
+    private Object postcode;
     @SerializedName("state_id")
     @Expose
     private Object stateId;
@@ -84,9 +84,21 @@ public class OrderInfo_ {
     @SerializedName("date_added")
     @Expose
     private String dateAdded;
+    @SerializedName("customer_otp")
+    @Expose
+    private String customerOtp;
+    @SerializedName("outlet_otp")
+    @Expose
+    private String outletOtp;
     @SerializedName("last_updated")
     @Expose
     private Object lastUpdated;
+    @SerializedName("area_id")
+    @Expose
+    private String areaId;
+    @SerializedName("sub_service_area")
+    @Expose
+    private String subServiceArea;
 
     public String getOrderId() {
         return orderId;
@@ -128,11 +140,11 @@ public class OrderInfo_ {
         this.outletId = outletId;
     }
 
-    public Object getDeliveryId() {
+    public String getDeliveryId() {
         return deliveryId;
     }
 
-    public void setDeliveryId(Object deliveryId) {
+    public void setDeliveryId(String deliveryId) {
         this.deliveryId = deliveryId;
     }
 
@@ -232,11 +244,11 @@ public class OrderInfo_ {
         this.city = city;
     }
 
-    public String getPostcode() {
+    public Object getPostcode() {
         return postcode;
     }
 
-    public void setPostcode(String postcode) {
+    public void setPostcode(Object postcode) {
         this.postcode = postcode;
     }
 
@@ -296,12 +308,44 @@ public class OrderInfo_ {
         this.dateAdded = dateAdded;
     }
 
+    public String getCustomerOtp() {
+        return customerOtp;
+    }
+
+    public void setCustomerOtp(String customerOtp) {
+        this.customerOtp = customerOtp;
+    }
+
+    public String getOutletOtp() {
+        return outletOtp;
+    }
+
+    public void setOutletOtp(String outletOtp) {
+        this.outletOtp = outletOtp;
+    }
+
     public Object getLastUpdated() {
         return lastUpdated;
     }
 
     public void setLastUpdated(Object lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getSubServiceArea() {
+        return subServiceArea;
+    }
+
+    public void setSubServiceArea(String subServiceArea) {
+        this.subServiceArea = subServiceArea;
     }
 
 }

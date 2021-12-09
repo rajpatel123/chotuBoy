@@ -81,9 +81,15 @@ public class NewOrderDeliveryAdapter extends RecyclerView.Adapter<NewOrderDelive
             holder.contactType.setText("Delivery Person : ");
 
         }
+        if (moviesList.get(position).getPaymentType().equalsIgnoreCase("ROZERPAY")){
+            holder.paymentMode.setText("Online");
 
+        }else{
+            holder.paymentMode.setText("CASH");
+
+        }
         String deliveryDetails=""+moviesList.get(position).getFirstname()+" "+(!TextUtils.isEmpty(moviesList.get(position).getLastname())?""+moviesList.get(position).getLastname():"")
-                +"\n"+moviesList.get(position).getPhone()+"\n"+moviesList.get(position).getAddress()+"\n"+
+                +"\n"+moviesList.get(position).getPhone()+"\n"+moviesList.get(position).getAddress()+"\n"+moviesList.get(position).getSub_service_area()+"\n"+
                 moviesList.get(position).getCity();
         holder.addressTv.setText(""+deliveryDetails);
 

@@ -116,7 +116,13 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
 
         holder.tvOrderPlaced.setText("ORDER Placed on :  " + Utils.orderPlaced(moviesList.get(position).getDateAdded()));
         holder.deliveryTime.setText("Delivery Date :   " + Utils.startTimeFormat(Long.parseLong(moviesList.get(position).getSlotBook())*1000));
+        if (moviesList.get(position).getPaymentType().equalsIgnoreCase("ROZERPAY")){
+            holder.paymentMode.setText("Online");
 
+        }else{
+            holder.paymentMode.setText("CASH");
+
+        }
         holder.totalPaidAmount.setText("Rs " + total);
         if (!TextUtils.isEmpty(moviesList.get(position).getDelivery_name())) {
             holder.deliveryPeronName.setText("" + moviesList.get(position).getDelivery_name());

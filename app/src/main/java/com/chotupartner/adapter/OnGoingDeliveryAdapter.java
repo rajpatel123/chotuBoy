@@ -68,10 +68,16 @@ public class OnGoingDeliveryAdapter extends RecyclerView.Adapter<OnGoingDelivery
         holder.tvDeliveryChar.setText("Rs " + moviesList.get(position).getDeliveryCharge());
 
         holder.tvOrderID1.setText("" + moviesList.get(position).getOrderCustomerId());
+        if (moviesList.get(position).getPaymentType().equalsIgnoreCase("ROZERPAY")){
+            holder.paymentMode.setText("Online");
 
+        }else{
+            holder.paymentMode.setText("CASH");
+
+        }
         int total = (int) Float.parseFloat(moviesList.get(position).getAmount());
         String deliveryDetails=""+moviesList.get(position).getFirstname()+" "+(!TextUtils.isEmpty(moviesList.get(position).getLastname())?""+moviesList.get(position).getLastname():"")
-                +"\n"+moviesList.get(position).getPhone()+"\n"+moviesList.get(position).getAddress()+"\n"+
+                +"\n"+moviesList.get(position).getPhone()+"\n"+moviesList.get(position).getAddress()+"\n"+moviesList.get(position).getSub_service_area()+"\n"+
                 moviesList.get(position).getCity();
         holder.addressTv.setText(""+deliveryDetails);
 

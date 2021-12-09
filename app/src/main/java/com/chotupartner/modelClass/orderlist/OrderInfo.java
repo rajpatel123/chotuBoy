@@ -88,6 +88,18 @@ public class OrderInfo {
     @Expose
     private String dateAdded;
 
+    public String getSub_service_area() {
+        return sub_service_area;
+    }
+
+    public void setSub_service_area(String sub_service_area) {
+        this.sub_service_area = sub_service_area;
+    }
+
+    @SerializedName("sub_service_area")
+    @Expose
+    private String sub_service_area;
+
 
     public String getOutlet_otp() {
         return outlet_otp;

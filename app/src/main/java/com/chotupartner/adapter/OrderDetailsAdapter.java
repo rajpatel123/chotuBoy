@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chotupartner.OrderDetailsActivity;
 import com.chotupartner.R;
-import com.chotupartner.modelClass.orderDetailsModel.OrderProduct;
+import com.chotupartner.modelClass.forOutLet.OrderProduct;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -24,11 +24,9 @@ import java.util.List;
 public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapter.ViewHolder> {
 
     private List<OrderProduct> moviesList;
-    private LayoutInflater mInflater;
     private OrderDetailsAdapter.ItemClickListener mClickListener;
     boolean check = true;
     OrderDetailsActivity orderDetailsActivity;
-    int value = 0, count = 1;
 
     // data is passed into the constructor
     public OrderDetailsAdapter(OrderDetailsActivity orderDetailsActivity, List<OrderProduct> moviesList) {
@@ -49,7 +47,7 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
 
     // binds the data to the TextView in each cell
     @Override
-    public void onBindViewHolder(@NonNull OrderDetailsAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull OrderDetailsAdapter.ViewHolder holder,  int position) {
        if (moviesList.get(position).getDiscount().equalsIgnoreCase("0")) {
            holder.tvOrdderNuber.setVisibility(View.GONE);
            holder.rlDiscount.setVisibility(View.GONE);
